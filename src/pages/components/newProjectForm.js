@@ -1,5 +1,5 @@
-import { makeProject } from ".";
-import { appendProject } from "./project";
+import projectList from "../../models/project-list";
+import { appendProject, makeProject } from "./projectItem";
 
 export function makeForm() {
     const formContainer = document.createElement('div');
@@ -18,7 +18,7 @@ export function makeForm() {
     button.textContent = 'Create Project';
     button.setAttribute('type', 'button');
     button.addEventListener('click', () => {
-        appendProject()
+        appendProject(projectList.addProject(input.value));
         submitForm();
     })
     form.append(div, button);

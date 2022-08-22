@@ -2,13 +2,6 @@ import projectList from "../../models/project-list";
 import { component as renderProject } from "../indexes/single-project-view";
 import { removeChildren } from '../handlers/removeChildren'
 
-function getProjectName() {
-    const form = document.querySelector('form');
-    const input = form.querySelector('input');
-    const projectName = input.value;
-    return projectName;
-}
-
 export function makeProject(project) {
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('project');
@@ -27,9 +20,8 @@ export function makeProject(project) {
     return projectDiv;
 }
 
-export function appendProject() {
+export function appendProject(project) {
     const projectsContainer = document.querySelector('.projects-container');
-    const project = projectList.addProject(getProjectName());
     const projectDiv = makeProject(project);
     projectsContainer.append(projectDiv);
 }
