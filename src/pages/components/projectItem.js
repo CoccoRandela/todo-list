@@ -1,15 +1,16 @@
 import projectList from "../../models/project-list";
-import { component as renderProject } from "../indexes/single-project-view";
+import { component as runProject } from "../indexes/single-project-view";
 import { removeChildren } from '../handlers/removeChildren'
 
 export function makeProject(project) {
+    console.log(project.name)
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('project');
     const title = document.createElement('p');
     title.textContent = project.name;
     title.addEventListener('click', () => {
         removeChildren(document.querySelector('.content'))
-        renderProject(project)
+        runProject(project)
     })
     const button = document.createElement('button');
     button.addEventListener('click', () => {
@@ -18,12 +19,6 @@ export function makeProject(project) {
     button.textContent = 'delete';
     projectDiv.append(title, button)
     return projectDiv;
-}
-
-export function appendProject(project) {
-    const projectsContainer = document.querySelector('.projects-container');
-    const projectDiv = makeProject(project);
-    projectsContainer.append(projectDiv);
 }
 
 function deleteProject(project, div) {

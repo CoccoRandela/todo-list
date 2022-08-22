@@ -1,5 +1,6 @@
 import projectList from "../../models/project-list";
-import { appendProject, makeProject } from "./projectItem";
+import { submitForm, renderProjectItem } from "../handlers";
+
 
 export function makeForm() {
     const formContainer = document.createElement('div');
@@ -18,16 +19,12 @@ export function makeForm() {
     button.textContent = 'Create Project';
     button.setAttribute('type', 'button');
     button.addEventListener('click', () => {
-        appendProject(projectList.addProject(input.value));
-        submitForm();
+        const project = projectList.addProject(input.value);
+        const container = document.querySelector('.projects-container');
+        renderProjectItem(project, container);
+        submitForm(formContainer);
     })
     form.append(div, button);
     formContainer.append(form)
     return formContainer;
-}
-
-
-function submitForm() {
-    const form = document.querySelector('.form-container');
-    form.remove();
 }
