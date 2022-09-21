@@ -1,5 +1,11 @@
-import './styles.css';
-import { component  as projectListPage } from './pages/indexes/project-list-view';
+import React from 'react';
+import  ReactDOM from 'react-dom/client';
+import  ProjectIndex from './components/ProjectIndex';
 
 
-projectListPage();
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+        <ProjectIndex />
+    </React.StrictMode>
+);
