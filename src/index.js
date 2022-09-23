@@ -1,11 +1,9 @@
 import React from 'react';
 import  ReactDOM from 'react-dom/client';
-import  ProjectIndex from './components/ProjectIndex';
+import App from './App';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <ProjectIndex />
-    </React.StrictMode>
+    <App/>
 );
