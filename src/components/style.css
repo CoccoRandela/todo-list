@@ -20,6 +20,12 @@ button.nav-btn.calendar-btn {
 div.prj-index {
     padding: 0 2em;
     display: grid;
+    height: 80vh;
+    align-content: start;
+}
+
+header > h1 {
+    margin: 0;
 }
 
 .prj-index > .projects {

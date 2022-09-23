@@ -1,7 +1,20 @@
-body {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-height: 100vh;  
+}
+
+body {     
     margin: 0;
+}
+
+#root {
+    max-height: 100vh;
 }
 
 header > h2 {
     text-align: center;
+    margin: 0;
 }
