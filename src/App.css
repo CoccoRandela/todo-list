@@ -12,6 +12,7 @@ body {
 
 #root {
     max-height: 100vh;
+    position: relative;
 }
 
 header > h2 {
