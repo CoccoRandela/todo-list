@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Modal from "./Modal";
+import ModalForm from "./ModalForm";
 
 
 export default function ProjectsIndex() {
@@ -12,7 +12,7 @@ export default function ProjectsIndex() {
 
     return (
         <div className="prj-index">
-            {modal && <Modal className="modal prj-mod" options={['title', 'description']}/>}
+            {modal && <ModalForm className="modal prj-mod" options={['title', 'description']}/>}
             <header>    
                 <h1>Your Projects</h1>
             </header>
