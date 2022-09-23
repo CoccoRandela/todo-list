@@ -12,7 +12,7 @@ export default function ProjectsIndex() {
 
     return (
         <div className="prj-index">
-            {modal && <Modal/>}
+            {modal && <Modal className="modal prj-mod" options={['title', 'description']}/>}
             <header>    
                 <h1>Your Projects</h1>
             </header>
