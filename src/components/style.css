@@ -6,8 +6,8 @@ nav.navbar {
 }
 
 button.nav-btn {
-    padding: 0 1em;
-    background-color: transparent;
+    padding: 1em;
+    background: none;
     border: none;
 }
 
@@ -20,16 +20,24 @@ button.nav-btn.calendar-btn {
 div.prj-index {
     padding: 0 2em;
     display: grid;
+    gap: 1em;
     height: 80vh;
     align-content: start;
 }
 
-header > h1 {
+header.prj-head {
+    display: flex;
+    align-items: center;
+}
+
+header.prj-head > h1 {
     margin: 0;
+    flex-grow: 1;
 }
 
 .prj-index > .projects {
-    display: grid;   
+    display: grid; 
+    gap: 1em;  
 }
 
 /* Modal */
@@ -55,4 +63,20 @@ div.prj-mod > form {
 form > div > label {
     display: grid;
     grid-auto-flow: row;
+}
+
+/* Card */
+
+div.project {
+    display: grid;
+    grid-auto-flow: column;
+    row-gap: .5em;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
+    padding: 1em;
+    border: .1em solid black;
+}
+
+div.project > * {
+    margin: 0;
 }

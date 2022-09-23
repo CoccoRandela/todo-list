@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function ModalForm({ className, options }) {  
+export default function ModalForm({ item, className, options, addItem, closeModal }) {  
     
     const inputsInitialState = {};
     options.map(option => {
@@ -10,12 +10,13 @@ export default function ModalForm({ className, options }) {
     const [inputs, setInputs] = useState(inputsInitialState);
 
 
+
     const formInputs = options.map(option => {
         return (
-            <div>
+            <div key={option}>
                 <label>
                     {option}
-                    <input defaultValue={inputs[option]} onChange={(e) => 
+                    <input required defaultValue={inputs[option]} onChange={(e) => 
                         {
                             setInputs({
                                 ...inputs, [option]: e.target.value
@@ -26,11 +27,20 @@ export default function ModalForm({ className, options }) {
             </div>
         )
     })
+
+    function handleInputs(e) {
+        e.preventDefault();
+        addItem(inputs);
+    }
     
     return (
         <div className={className}>
-            <form>
-            {formInputs}
+            <form onSubmit={handleInputs}>
+                {formInputs}
+                <div>
+                    <button onClick={closeModal}>Cancel</button>
+                    <button type="submit">{`Create ${item}`}</button>    
+                </div>
             </form>
         </div>
     )
