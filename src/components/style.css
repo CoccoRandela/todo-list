@@ -14,3 +14,22 @@ button.nav-btn {
 button.nav-btn.calendar-btn {
     border-left: .1em solid black;
 }
+
+/* Projects Index */
+
+div.prj-index {
+    padding: 0 2em;
+    display: grid;
+}
+
+.prj-index > .projects {
+    display: grid;   
+}
+
+/* Modal */
+
+div.modal {
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+}
