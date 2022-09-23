@@ -1,0 +1,16 @@
+/* Navbar */
+
+nav.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+button.nav-btn {
+    padding: 0 1em;
+    background-color: transparent;
+    border: none;
+}
+
+button.nav-btn.calendar-btn {
+    border-left: .1em solid black;
+}
