@@ -9,16 +9,19 @@ export default function ProjectsIndex() {
 
     const [projects, setProjects] = useState([{id:0, title: 'cacca', description: 'pupu'}])
 
+    console.log(projects)
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
 
     function addProject(inputs) {
+        const [ lastProject ] = projects.slice(-1);
+        console.log(lastProject, 'yo')
         openCloseModal()
         setProjects([
             ...projects, { 
-                id: projects.length,
+                id: lastProject.id + 1,
                 ...inputs
             }
         ])
