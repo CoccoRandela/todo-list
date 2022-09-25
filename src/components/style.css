@@ -71,6 +71,7 @@ div.project {
     display: grid;
     grid-auto-flow: column;
     row-gap: .5em;
+    column-gap: 4em;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 3fr 1fr;
     padding: 1em;

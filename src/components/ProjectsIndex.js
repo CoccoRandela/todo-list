@@ -9,6 +9,7 @@ export default function ProjectsIndex() {
 
     const [projects, setProjects] = useState([{id:0, title: 'cacca', description: 'pupu'}])
 
+
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
@@ -29,10 +30,25 @@ export default function ProjectsIndex() {
         }))
     }
 
+    function editProject(projectId, title, description) {
+
+        const newProjects = projects.filter(project => {
+            if (project.id !== projectId) return project;
+        });
+
+        newProjects.push({
+            id: projectId,
+            title,
+            description
+        })
+
+        setProjects(newProjects)
+    }
+
 
     const projectCards = projects.map(project => {
         return (
-            <Card item={project} deleteItem={deleteProject} key={project.id}/>
+            <Card item={project} deleteItem={deleteProject} editItem={editProject} key={project.id}/>
         )
     });
 
