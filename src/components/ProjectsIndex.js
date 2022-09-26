@@ -9,14 +9,14 @@ export default function ProjectsIndex() {
 
     const [projects, setProjects] = useState([{id:0, title: 'cacca', description: 'pupu'}])
 
-    console.log(projects)
-
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
 
     function addProject(inputs) {
+        
         const [ lastProject ] = projects.slice(-1);
+
         console.log(lastProject, 'yo')
         openCloseModal()
         setProjects([
@@ -29,14 +29,14 @@ export default function ProjectsIndex() {
 
     function deleteProject(projectId) {
         setProjects(projects.filter(project => {
-            if (project.id !== projectId) return project;
+            return project.id !== projectId
         }))
     }
 
     function editProject(projectId, title, description) {
 
         const newProjects = projects.filter(project => {
-            if (project.id !== projectId) return project;
+            return project.id !== projectId
         });
 
         newProjects.push({
