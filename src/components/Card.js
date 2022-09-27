@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Card({item, deleteItem, editItem}) {
 
@@ -6,7 +7,12 @@ export default function Card({item, deleteItem, editItem}) {
     const [title, setTitle] = useState(item.title);
     const [description, setDescription] = useState(item.description);
 
-    let cardTitle = <h3>{item.title}</h3>;
+    function handleEdit() {
+        editItem(item, title, description);
+        setEdit(false)
+    }
+
+    let cardTitle = <h3><Link to={`projects/${item.id}`}>{item.title}</Link></h3>;
 
     let cardDescription = <p>{item.description}</p>;
 
@@ -14,11 +20,6 @@ export default function Card({item, deleteItem, editItem}) {
         <button onClick={() => setEdit(true)}>Edit</button>
         <button onClick={() => deleteItem(item.id)}>Delete</button>        
     </>
-
-    function handleEdit() {
-        editItem(item.id, title, description);
-        setEdit(false)
-    }
 
     if (edit) {
         cardTitle = <input type="text" defaultValue={item.title} onChange={(e) => setTitle(e.target.value)}/>;

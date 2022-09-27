@@ -7,7 +7,9 @@ export default function ProjectsIndex() {
 
     const [modal, setModal] = useState(false);
 
-    const [projects, setProjects] = useState([{id:0, title: 'cacca', description: 'pupu'}])
+    const [projects, setProjects] = useState([{id:0, title: 'cacca', description: 'pupu', todos: []}])
+
+    console.log(projects)
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
@@ -22,7 +24,8 @@ export default function ProjectsIndex() {
         setProjects([
             ...projects, { 
                 id: lastProject.id + 1,
-                ...inputs
+                ...inputs,
+                todos: []
             }
         ])
     }
@@ -33,16 +36,17 @@ export default function ProjectsIndex() {
         }))
     }
 
-    function editProject(projectId, title, description) {
+    function editProject(editablePrj, title, description) {
 
         const newProjects = projects.filter(project => {
-            return project.id !== projectId
+            return project.id !== editablePrj.id
         });
 
         newProjects.push({
-            id: projectId,
+            id: editablePrj.id,
             title,
-            description
+            description,
+            todos: editablePrj.todos
         })
 
         setProjects(newProjects)
