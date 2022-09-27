@@ -1,29 +1,32 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ModalForm from "./ModalForm";
-import Card from "./Card";
+import ProjectCard from "./ProjectCard";
+
 
 
 export default function ProjectsIndex() {
 
     const [modal, setModal] = useState(false);
 
-    const [projects, setProjects] = useState([{id:0, title: 'cacca', description: 'pupu', todos: []}])
-
-    console.log(projects)
+    const [projects, setProjects] = useState(JSON.parse(localStorage.getItem('projects')))
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
 
+    useEffect(() => {
+        console.log(projects)
+        localStorage.setItem('projects', JSON.stringify(projects))
+    }, [projects])
+
     function addProject(inputs) {
         
         const [ lastProject ] = projects.slice(-1);
 
-        console.log(lastProject, 'yo')
         openCloseModal()
         setProjects([
             ...projects, { 
-                id: lastProject.id + 1,
+                id: lastProject ? lastProject.id + 1 : 0,
                 ...inputs,
                 todos: []
             }
@@ -55,7 +58,7 @@ export default function ProjectsIndex() {
 
     const projectCards = projects.map(project => {
         return (
-            <Card item={project} deleteItem={deleteProject} editItem={editProject} key={project.id}/>
+            <ProjectCard item={project} deleteItem={deleteProject} editItem={editProject} key={project.id}/>
         )
     });
 
