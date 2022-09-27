@@ -1,6 +1,8 @@
 import React from "react";
-import { Content, Navbar } from "./components";
+import { Outlet } from "react-router";
+import { Navbar } from "./components";
 import "./App.css";
+
 
 export default function App() {
     return (
@@ -9,7 +11,7 @@ export default function App() {
                 <h2>BetterLate</h2>
             </header>
             <Navbar/>
-            <Content/>
+            <Outlet/>            
         </> 
     )    
 }

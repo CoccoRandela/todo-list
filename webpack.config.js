@@ -8,6 +8,7 @@ module.exports = {
         filename: 'index.js',
         publicPath: '/'
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {

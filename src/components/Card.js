@@ -12,7 +12,7 @@ export default function Card({item, deleteItem, editItem}) {
         setEdit(false)
     }
 
-    let cardTitle = <h3><Link to={`projects/${item.id}`}>{item.title}</Link></h3>;
+    let cardTitle = <h3><Link to={`${item.id}`}>{item.title}</Link></h3>;
 
     let cardDescription = <p>{item.description}</p>;
 
