@@ -91,7 +91,7 @@ div.todo {
     grid-auto-flow: column;
     row-gap: .5em;
     column-gap: 4em;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, fit-content(10px));
     grid-template-columns: 3fr 1fr;
     padding: 1em;
     border: .1em solid black;
@@ -101,6 +101,15 @@ div.todo > * {
     margin: 0;
 }
 
-div.todo > .check-boxes {
+div.todo > .c-box-cont {
     grid-column: span 2;
+}
+
+.c-box-cont > header {
+    display: flex;
+    gap: 1em;
+}
+
+.c-box-cont > header > h4 {
+    margin: 0;
 }

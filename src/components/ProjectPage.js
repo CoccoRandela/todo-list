@@ -1,17 +1,21 @@
 import React,{ useState, useEffect }from "react";
 import { useParams } from "react-router";
 import ModalForm from "./ModalForm";
-import Card from "./Card";
+import TodoCard from "./TodoCard";
 
 export default function Project() {
+
     const params = useParams();
     const projectId = Number(params.id);
+
     const  projects = JSON.parse(localStorage.getItem('projects'));
+
     const [ project ] = projects.filter(project => project.id === projectId)
 
 
     const [modal, setModal] = useState(false);
     const [todos, setTodos] = useState(project.todos)
+    
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
@@ -24,8 +28,6 @@ export default function Project() {
 
     function addTodo(inputs) {
 
-        console.log(inputs)
-        
         const [ lastTodo ] = todos.slice(-1);
 
         openCloseModal()
@@ -39,9 +41,14 @@ export default function Project() {
         ])
     }
 
+    function editCheckboxes(todo, checkbox) {
+
+
+    }
+
     const todoCards = todos.map(todo => {
         return (
-            <Card item={todo} className="todo" key={todo.id}/>
+            <TodoCard todo={todo} className="todo" editCheckboxes={editCheckboxes} key={todo.id}/>
         )
     })
 

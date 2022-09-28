@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ModalForm from "./ModalForm";
-import Card from "./Card";
+import ProjectCard from "./ProjectCard";
 
 
 
@@ -57,7 +57,7 @@ export default function ProjectsIndex() {
 
     const projectCards = projects.map(project => {
         return (
-            <Card item={project} className="project" deleteItem={deleteProject} editItem={editProject} key={project.id}/>
+            <ProjectCard item={project} deleteItem={deleteProject} editItem={editProject} key={project.id}/>
         )
     });
 
