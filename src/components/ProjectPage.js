@@ -2,6 +2,7 @@ import React,{ useState, useEffect }from "react";
 import { useParams } from "react-router";
 import ModalForm from "./ModalForm";
 import TodoCard from "./TodoCard";
+import arrayComp from "../arraycomp";
 
 export default function Project() {
 
@@ -16,14 +17,23 @@ export default function Project() {
     const [modal, setModal] = useState(false);
     const [todos, setTodos] = useState(project.todos)
     
+    
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
 
+    // useEffect(() => {
+    //     console.log(project.todos)
+    // }, [])
+
     useEffect(() => {
-        project.todos = todos;
-        localStorage.setItem('projects', JSON.stringify(projects))
+        console.log('inside', arrayComp(project.todos, todos))
+        if (!arrayComp(project.todos, todos)) {
+            console.log('here')
+            project.todos.push(todos[todos.length-1])          
+        }
+        localStorage.setItem('projects', JSON.stringify(projects))  
     }, [todos])
 
     function addTodo(inputs) {
@@ -41,14 +51,23 @@ export default function Project() {
         ])
     }
 
-    function editCheckboxes(todo, checkbox) {
+    function editTodo(editedTodo) {
 
+        // const newTodos = todos.map(todo => {
+        //     return todo.id === editedTodo.id? editedTodo : todo;
+        // })
+
+        // console.log(newTodos)
+
+        // setTodos(todos.map(todo => {
+        //     return todo.id === editedTodo.id? editedTodo : todo;
+        // }))
 
     }
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard todo={todo} className="todo" editCheckboxes={editCheckboxes} key={todo.id}/>
+            <TodoCard todo={todo} className="todo" editTodo={editTodo} key={todo.id}/>
         )
     })
 

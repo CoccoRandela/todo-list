@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
-export default function TodoCard({ todo, editCheckboxes }) {
-    // const  projects = JSON.parse(localStorage.getItem('projects'));
+export default function TodoCard({ todo, editTodo }) {
 
     const [checkboxes, setCheckboxes] = useState(todo.checkboxes);
 
     useEffect(() => {
-        //todo.checkboxes.push(checkboxes);
-        console.log(todo, 'todo')
+        if(!arrayComp(todo.checkboxes, checkboxes)) {
+            todo.checkboxes.push(checkboxes[checkboxes.length-1]);
+            //editTodo(todo)
+        }
+
     }, [checkboxes])
 
     function cardColor() {
@@ -36,6 +39,7 @@ export default function TodoCard({ todo, editCheckboxes }) {
                 task: '',
             }
         ])
+
     }
 
     let cardTitle = <h3>{todo.title}</h3>
