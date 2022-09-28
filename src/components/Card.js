@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import CheckboxContainer from "./CheckboxContainer";
 
-export default function Card({item, deleteItem, editItem}) {
+export default function Card({item, className, deleteItem, editItem}) {
 
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState(item.title);
     const [description, setDescription] = useState(item.description);
+    const [checkboxes, setCheckboxes] = useState(item.checkboxes);
 
     function handleEdit() {
         editItem(item, title, description);
         setEdit(false)
     }
 
-    let cardTitle = <h3><Link to={`${item.id}`}>{item.title}</Link></h3>;
+    let cardTitle = item.todos ? <h3>
+        <Link to={`${item.id}`}>{item.title}</Link>
+        </h3> : <h3>{item.title}</h3>;
 
     let cardDescription = <p>{item.description}</p>;
 
@@ -32,11 +36,29 @@ export default function Card({item, deleteItem, editItem}) {
         </> 
     }
 
+    const cardColor = () => {
+        switch(item.priority) {
+            case 'low':
+                return 'green';
+                break;
+            case 'medium':
+                return 'yellow';
+                break;
+            case 'high':
+                return 'red';
+                break;
+        }
+    }
+
 
     return (
-        <div className="project">
+        <div style={{
+            backgroundColor: cardColor()
+        }} className={className}>
+            {item.priority && <div><button>{item.priority}</button></div>}
             {cardTitle}
-            {cardDescription}            
+            {description && cardDescription}
+            {checkboxes && <CheckboxContainer checkboxes={checkboxes}/>}            
             {cardBtns}
         </div>
     )

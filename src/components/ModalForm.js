@@ -4,38 +4,55 @@ export default function ModalForm({ item, className, options, addItem, closeModa
     
     const inputsInitialState = {};
     options.map(option => {
-        inputsInitialState[option] = '';
+        if (option === 'priority' ) {
+            inputsInitialState[option] = 'low'
+        } else inputsInitialState[option] = '';
     })
 
     const [inputs, setInputs] = useState(inputsInitialState);
 
-
-
-    const formInputs = options.map(option => {
-        return (
-            <div key={option}>
-                <label>
-                    {option}
-                    <input required defaultValue={inputs[option]} onChange={(e) => 
-                        {
-                            setInputs({
-                                ...inputs, [option]: e.target.value
-                            })
-                        }
-                    }/>
-                </label>
-            </div>
-        )
-    })
-
-    function handleInputs(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         addItem(inputs);
     }
+
+    function handleChange(e, option) {
+        console.log(e.target.value)
+        setInputs({
+            ...inputs, [option]: e.target.value
+        })
+    }
+
+    const formInputs = options.map(option => {
+        if (option === 'priority') {
+            return (
+                <div key={option}>
+                    <label>
+                        {option}
+                        <select required defaultValue="low" onChange={(e)=> handleChange(e,option)}>
+                            <option value="low">low</option>
+                            <option value="medium">medium</option>
+                            <option value="high">high</option>
+                        </select>
+                    </label>
+                </div>               
+            )
+        } else {
+            return (
+                <div key={option}>
+                    <label>
+                        {option}
+                        <input type={option === 'due date'? "date":"text"} required defaultValue={inputs[option]} onChange={(e)=> handleChange(e,option)}/>
+                    </label>
+                </div>
+            )
+        }
+    })
+
     
     return (
         <div className={className}>
-            <form onSubmit={handleInputs}>
+            <form onSubmit={handleSubmit}>
                 {formInputs}
                 <div>
                     <button onClick={closeModal}>Cancel</button>

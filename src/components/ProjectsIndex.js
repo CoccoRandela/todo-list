@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ModalForm from "./ModalForm";
-import ProjectCard from "./ProjectCard";
+import Card from "./Card";
 
 
 
@@ -15,7 +15,6 @@ export default function ProjectsIndex() {
     }
 
     useEffect(() => {
-        console.log(projects)
         localStorage.setItem('projects', JSON.stringify(projects))
     }, [projects])
 
@@ -58,12 +57,12 @@ export default function ProjectsIndex() {
 
     const projectCards = projects.map(project => {
         return (
-            <ProjectCard item={project} deleteItem={deleteProject} editItem={editProject} key={project.id}/>
+            <Card item={project} className="project" deleteItem={deleteProject} editItem={editProject} key={project.id}/>
         )
     });
 
     return (
-        <div className="prj-index">
+        <div className="index">
 
             {modal && <ModalForm item="project" className="modal prj-mod" options={['title', 'description']} addItem={addProject} closeModal={openCloseModal}/>}
 
