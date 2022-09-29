@@ -3,8 +3,6 @@ import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
 export default function TodoCard({ todo, editTodo }) {
-    console.log('--rendering')
-
 
     const [checkboxes, setCheckboxes] = useState([]);
 
@@ -46,12 +44,23 @@ export default function TodoCard({ todo, editTodo }) {
 
     }
 
+    function editCheckbox(editedCheckbox) {
+
+        console.log(editedCheckbox)
+
+        setCheckboxes(checkboxes.map(checkbox => {
+            return checkbox.id === editedCheckbox.id? editedCheckbox : checkbox;
+        }))
+
+    }
+
     let cardTitle = <h3>{todo.title}</h3>
 
-    let cardBtns = <>
-        <button onClick={() => setEdit(true)}>Edit</button>
+    let cardBtn = <>
         <button onClick={() => deleteItem(todo.id)}>Delete</button>        
     </>
+
+    const dueDate = new Date(todo.dueDate).toLocaleDateString()
 
     // if (edit) {
     //     cardTitle = <input type="text" defaultValue={item.title} onChange={(e) => setTitle(e.target.value)}/>;
@@ -73,9 +82,11 @@ export default function TodoCard({ todo, editTodo }) {
 
             {cardTitle}
 
-            {checkboxes && <CheckboxContainer checkboxes={checkboxes} addCheckbox={addCheckbox}/>}      
-                  
-            {cardBtns}
+            {checkboxes && <CheckboxContainer checkboxes={checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>} 
+
+
+            <div>due: {dueDate}</div>      
+            {cardBtn}
 
         </div>
     )

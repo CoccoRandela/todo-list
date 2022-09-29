@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+import Checkbox from "./Checkbox";
 
-export default function CheckboxContainer({ checkboxes, addCheckbox }) {
+
+export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbox }) {
+
 
     const [boxActive, setBoxActive] = useState(false)
 
 
     const cbPanels = checkboxes.map(checkbox => {
-        return (
-            <div className="checkbox" key={checkbox.id}>
-            <input type="checkbox" value={checkbox.task}/> 
-            </div>
-        )
+        return <Checkbox checkbox={checkbox} editCheckbox={editCheckbox} />
     })
 
     return (
