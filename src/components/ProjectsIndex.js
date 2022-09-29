@@ -9,11 +9,15 @@ export default function ProjectsIndex() {
 
     const [modal, setModal] = useState(false);
 
-    const [projects, setProjects] = useState(JSON.parse(localStorage.getItem('projects')))
+    const [projects, setProjects] = useState([])
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
+
+    useEffect(() => {
+        setProjects(JSON.parse(localStorage.getItem('projects')))
+    }, [])
 
     useEffect(() => {
         localStorage.setItem('projects', JSON.stringify(projects))

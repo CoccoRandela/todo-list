@@ -3,15 +3,19 @@ import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
 export default function TodoCard({ todo, editTodo }) {
+    console.log('--rendering')
 
-    const [checkboxes, setCheckboxes] = useState(todo.checkboxes);
+
+    const [checkboxes, setCheckboxes] = useState([]);
 
     useEffect(() => {
-        if(!arrayComp(todo.checkboxes, checkboxes)) {
-            todo.checkboxes.push(checkboxes[checkboxes.length-1]);
-            editTodo(todo)
-        }
+        setCheckboxes(todo.checkboxes)
+    }, [])
 
+    useEffect(() => {
+        console.log('here')
+        todo.checkboxes = [...checkboxes];
+        editTodo(todo)
     }, [checkboxes])
 
     function cardColor() {

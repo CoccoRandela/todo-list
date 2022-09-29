@@ -5,14 +5,12 @@ import TodoCard from "./TodoCard";
 import arrayComp from "../arraycomp";
 
 export default function Project() {
-    console.log('render pp')
+    console.log('render projct page')
 
     const params = useParams();
     const projectId = Number(params.id);
 
     const  projects = JSON.parse(localStorage.getItem('projects'));
-
-    console.log(projects)
 
     const [ project ] = projects.filter(project => project.id === projectId)
 
@@ -20,27 +18,21 @@ export default function Project() {
     const [modal, setModal] = useState(false);
     const [todos, setTodos] = useState([])
 
-    console.log(project.todos, todos, 'outside')
+
+    useEffect(() => {
+        setTodos(project.todos)
+    }, [])
+
+    useEffect(() => {
+        project.todos = [...todos]
+        localStorage.setItem('projects', JSON.stringify(projects))
+    }, [todos])
     
     
 
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
-
-    // useEffect(() => {
-    //     console.log(project.todos)
-    // }, [])
-
-    useEffect(() => {
-        console.log('inside', project.todos, todos)
-        if (!arrayComp(project.todos, todos)) {
-            console.log('here')
-            project.todos.push(todos[todos.length-1])          
-        }
-        // localStorage.setItem('projects', JSON.stringify(projects)) 
-        console.log(project.todos)
-    }, [todos])
 
     function addTodo(inputs) {
 
@@ -60,12 +52,6 @@ export default function Project() {
     }
 
     function editTodo(editedTodo) {
-
-        // const newTodos = todos.map(todo => {
-        //     return todo.id === editedTodo.id? editedTodo : todo;
-        // })
-
-        // console.log(newTodos)
 
         setTodos(todos.map(todo => {
             return todo.id === editedTodo.id? editedTodo : todo;
