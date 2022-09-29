@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function ProjectCard({item, deleteItem, editItem}) {
-    console.log('renders pp')
 
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState(item.title);

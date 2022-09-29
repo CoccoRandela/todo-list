@@ -5,17 +5,22 @@ import TodoCard from "./TodoCard";
 import arrayComp from "../arraycomp";
 
 export default function Project() {
+    console.log('render pp')
 
     const params = useParams();
     const projectId = Number(params.id);
 
     const  projects = JSON.parse(localStorage.getItem('projects'));
 
+    console.log(projects)
+
     const [ project ] = projects.filter(project => project.id === projectId)
 
 
     const [modal, setModal] = useState(false);
-    const [todos, setTodos] = useState(project.todos)
+    const [todos, setTodos] = useState([])
+
+    console.log(project.todos, todos, 'outside')
     
     
 
@@ -28,12 +33,13 @@ export default function Project() {
     // }, [])
 
     useEffect(() => {
-        console.log('inside', arrayComp(project.todos, todos))
+        console.log('inside', project.todos, todos)
         if (!arrayComp(project.todos, todos)) {
             console.log('here')
             project.todos.push(todos[todos.length-1])          
         }
-        localStorage.setItem('projects', JSON.stringify(projects))  
+        // localStorage.setItem('projects', JSON.stringify(projects)) 
+        console.log(project.todos)
     }, [todos])
 
     function addTodo(inputs) {
@@ -49,6 +55,8 @@ export default function Project() {
                 checkboxes: []
             }
         ])
+
+        console.log(project.todos, todos, 'in the create func')
     }
 
     function editTodo(editedTodo) {
@@ -59,9 +67,11 @@ export default function Project() {
 
         // console.log(newTodos)
 
-        // setTodos(todos.map(todo => {
-        //     return todo.id === editedTodo.id? editedTodo : todo;
-        // }))
+        setTodos(todos.map(todo => {
+            return todo.id === editedTodo.id? editedTodo : todo;
+        }))
+
+        console.log(project.todos, todos, 'in the edit func')
 
     }
 

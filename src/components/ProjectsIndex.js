@@ -6,6 +6,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function ProjectsIndex() {
 
+
     const [modal, setModal] = useState(false);
 
     const [projects, setProjects] = useState(JSON.parse(localStorage.getItem('projects')))

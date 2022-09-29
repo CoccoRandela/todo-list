@@ -17,7 +17,6 @@ export default function ModalForm({ item, className, options, addItem, closeModa
     }
 
     function handleChange(e, option) {
-        console.log(e.target.value)
         setInputs({
             ...inputs, [option]: e.target.value
         })

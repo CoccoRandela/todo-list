@@ -9,7 +9,7 @@ export default function TodoCard({ todo, editTodo }) {
     useEffect(() => {
         if(!arrayComp(todo.checkboxes, checkboxes)) {
             todo.checkboxes.push(checkboxes[checkboxes.length-1]);
-            //editTodo(todo)
+            editTodo(todo)
         }
 
     }, [checkboxes])
