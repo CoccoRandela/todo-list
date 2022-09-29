@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ProjectCard({item, deleteItem, editItem}) {
+    const navigate = useNavigate();
 
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState(item.title);
     const [description, setDescription] = useState(item.description);
+
+    function openProject() {
+        navigate(`${item.id}`)
+    }
 
 
     function handleEdit() {
@@ -13,12 +18,12 @@ export default function ProjectCard({item, deleteItem, editItem}) {
         setEdit(false)
     }
 
-    let cardTitle = <h3> <Link to={`${item.id}`}>{item.title}</Link></h3>
+    let cardTitle = <h3>{item.title}</h3>
 
     let cardDescription = <p>{item.description}</p>;
 
     let cardBtns = <>
-        <button onClick={() => setEdit(true)}>Edit</button>
+        <button onClick={openProject}>Open</button>
         <button onClick={() => deleteItem(item.id)}>Delete</button>        
     </>
 
