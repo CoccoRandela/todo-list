@@ -13,41 +13,41 @@ export default function ProjectCard({item, deleteItem, editItem}) {
     }
 
 
-    function handleEdit() {
-        editItem(item, title, description);
-        setEdit(false)
+    function handleEdit(info) {
+        switch (info) {
+            case 'title':
+                item.title = title;
+                break;
+            case 'description':
+                item.description = description;
+                break;
+        }
+        editItem(item);
     }
 
-    let cardTitle = <h3>{item.title}</h3>
 
-    let cardDescription = <p>{item.description}</p>;
+    // if (edit) {
+    //     cardTitle = <input type="text" defaultValue={item.title} onChange={(e) => setTitle(e.target.value)}/>;
 
-    let cardBtns = <>
-        <button onClick={openProject}>Open</button>
-        <button onClick={() => deleteItem(item.id)}>Delete</button>        
-    </>
+    //     cardDescription = <input type="text" defaultValue={item.description} onChange={(e) => setDescription(e.target.value)}/>
 
-    if (edit) {
-        cardTitle = <input type="text" defaultValue={item.title} onChange={(e) => setTitle(e.target.value)}/>;
-
-        cardDescription = <input type="text" defaultValue={item.description} onChange={(e) => setDescription(e.target.value)}/>
-
-        cardBtns = <>
-            <button onClick={handleEdit}>Done</button>
-            <button onClick={() => setEdit(false)}>Cancel</button>
-        </> 
-    }
+    //     cardBtns = <>
+    //         <button onClick={handleEdit}>Done</button>
+    //         <button onClick={() => setEdit(false)}>Cancel</button>
+    //     </> 
+    // }
 
 
     return (
         <div className="project">
-
-            {cardTitle}
-
-            {cardDescription}    
-                  
-            {cardBtns}
-
+            <input type="text" defaultValue={item.title} onChange={(e) => {
+                setTitle(e.target.value)
+            }} onBlur={() => handleEdit('title')}/>
+            <input type="text" defaultValue={item.description} onChange={(e) => {
+                setDescription(e.target.value)
+            }} onBlur={() => handleEdit('description')}/>
+            <button onClick={openProject}>Open</button>
+            <button onClick={() => deleteItem(item.id)}>Delete</button>     
         </div>
     )
 }

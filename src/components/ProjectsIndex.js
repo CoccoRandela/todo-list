@@ -11,6 +11,7 @@ export default function ProjectsIndex() {
 
     const [projects, setProjects] = useState([])
 
+
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
@@ -20,6 +21,7 @@ export default function ProjectsIndex() {
     }, [])
 
     useEffect(() => {
+        console.log('here')
         localStorage.setItem('projects', JSON.stringify(projects))
     }, [projects])
 
@@ -43,20 +45,11 @@ export default function ProjectsIndex() {
         }))
     }
 
-    function editProject(editablePrj, title, description) {
-
-        const newProjects = projects.filter(project => {
-            return project.id !== editablePrj.id
-        });
-
-        newProjects.push({
-            id: editablePrj.id,
-            title,
-            description,
-            todos: editablePrj.todos
-        })
-
-        setProjects(newProjects)
+    function editProject(editablePrj) {
+        console.log(editablePrj)
+        setProjects(projects.map(project => {
+            return editablePrj.id === project.id ? editablePrj : project;
+        }))
     }
 
 
