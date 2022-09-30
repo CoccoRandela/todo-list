@@ -5,7 +5,7 @@ import ProjectCard from "./ProjectCard";
 
 
 export default function ProjectsIndex() {
-
+    console.log('inside pro ind')
 
     const [modal, setModal] = useState(false);
 
@@ -21,7 +21,7 @@ export default function ProjectsIndex() {
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('projects', JSON.stringify(projects))
+        projects.length && localStorage.setItem('projects', JSON.stringify(projects))
     }, [projects])
 
     function addProject(inputs) {
@@ -44,17 +44,19 @@ export default function ProjectsIndex() {
         }))
     }
 
-    function editProject(editablePrj) {
-        console.log(editablePrj)
-        setProjects(projects.map(project => {
-            return editablePrj.id === project.id ? editablePrj : project;
-        }))
-    }
+    // function editProject(editablePrj) {
+
+    //     setProjects(projects.map(project => {
+    //         return editablePrj.id === project.id ? editablePrj : project;
+    //     }))
+    // }
+
 
 
     const projectCards = projects.map(project => {
+
         return (
-            <ProjectCard item={project} deleteItem={deleteProject} editItem={editProject} key={project.id}/>
+            <ProjectCard id={project.id} deleteItem={deleteProject} key={project.id}/>
         )
     });
 
