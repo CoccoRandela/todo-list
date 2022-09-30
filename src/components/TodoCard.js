@@ -6,7 +6,9 @@ export default function TodoCard({ todo, editTodo, deleteTodo }) {
 
     const [title, setTitle] = useState(todo.title);
     const [dueDate, setDueDate] = useState(todo.dueDate);
+    const [priority, setPriority] = useState(todo.priority);
     const [checkboxes, setCheckboxes] = useState([]);
+
 
     useEffect(() => {
         setCheckboxes(todo.checkboxes)
@@ -32,6 +34,20 @@ export default function TodoCard({ todo, editTodo, deleteTodo }) {
         }
     }
 
+    function togglePriority() {
+        switch (priority) {
+            case 'low':
+                setPriority('medium');
+                break;
+            case 'medium':
+                setPriority('high');
+                break;
+            case 'high':
+                setPriority('low');
+                break;
+        }
+    }
+
     function handleEdit(info) {
         switch (info) {
             case 'title':
@@ -39,6 +55,8 @@ export default function TodoCard({ todo, editTodo, deleteTodo }) {
                 break;
             case 'dueDate':
                 todo.dueDate = dueDate;
+            case 'priority':
+                todo.priority = priority;
         }
 
         editTodo(todo);
@@ -73,7 +91,10 @@ export default function TodoCard({ todo, editTodo, deleteTodo }) {
         <div style={{backgroundColor: addColor()}} className="todo">
 
             <div>
-                <button>{todo.priority}</button>
+                <button onClick={() => {
+                    togglePriority()
+                    handleEdit('priority')
+                    }}>{todo.priority}</button>
             </div>
 
             <input type="text" defaultValue={todo.title} onChange={(e) => {
