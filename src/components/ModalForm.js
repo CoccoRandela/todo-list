@@ -41,7 +41,12 @@ export default function ModalForm({ item, className, options, addItem, closeModa
                 <div key={option}>
                     <label>
                         {option === 'dueDate'? 'due date': option}
-                        <input type={option === 'dueDate'? "date":"text"} required defaultValue={inputs[option]} onChange={(e)=> handleChange(e,option)}/>
+                        <input 
+                        type={option === 'dueDate'? "date":"text"} 
+                        defaultValue={inputs[option]} onChange={(e)=> handleChange(e,option)} 
+                        min={option === 'dueDate'? new Date().toLocaleDateString('en-ca'): ''}
+                        required
+                        />
                     </label>
                 </div>
             )

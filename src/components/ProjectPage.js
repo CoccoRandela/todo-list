@@ -51,6 +51,12 @@ export default function Project() {
         console.log(project.todos, todos, 'in the create func')
     }
 
+    function deleteTodo(todoId) {
+        setTodos(todos.filter(todo => {
+            return todo.id !== todoId
+        }))
+    }
+
     function editTodo(editedTodo) {
 
         setTodos(todos.map(todo => {
@@ -63,7 +69,7 @@ export default function Project() {
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard todo={todo} className="todo" editTodo={editTodo} key={todo.id}/>
+            <TodoCard todo={todo} className="todo" editTodo={editTodo} deleteTodo={deleteTodo} key={todo.id}/>
         )
     })
 

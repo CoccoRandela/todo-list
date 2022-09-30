@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
-export default function TodoCard({ todo, editTodo }) {
+export default function TodoCard({ todo, editTodo, deleteTodo }) {
 
+    const [title, setTitle] = useState(todo.title);
+    const [dueDate, setDueDate] = useState(todo.dueDate);
     const [checkboxes, setCheckboxes] = useState([]);
 
     useEffect(() => {
@@ -16,7 +18,7 @@ export default function TodoCard({ todo, editTodo }) {
         editTodo(todo)
     }, [checkboxes])
 
-    function cardColor() {
+    function addColor() {
         switch(todo.priority) {
             case 'low':
                 return 'green';
@@ -28,6 +30,18 @@ export default function TodoCard({ todo, editTodo }) {
                 return 'red';
                 break;
         }
+    }
+
+    function handleEdit(info) {
+        switch (info) {
+            case 'title':
+                todo.title = title;
+                break;
+            case 'dueDate':
+                todo.dueDate = dueDate;
+        }
+
+        editTodo(todo);
     }
 
     function addCheckbox() {
@@ -54,39 +68,25 @@ export default function TodoCard({ todo, editTodo }) {
 
     }
 
-    let cardTitle = <h3>{todo.title}</h3>
-
-    let cardBtn = <>
-        <button onClick={() => deleteItem(todo.id)}>Delete</button>        
-    </>
-
-    const dueDate = new Date(todo.dueDate).toLocaleDateString()
-
-    // if (edit) {
-    //     cardTitle = <input type="text" defaultValue={item.title} onChange={(e) => setTitle(e.target.value)}/>;
-
-    //     cardDescription = <input type="text" defaultValue={item.description} onChange={(e) => setDescription(e.target.value)}/>
-
-    //     cardBtns = <>
-    //         <button onClick={handleEdit}>Done</button>
-    //         <button onClick={() => setEdit(false)}>Cancel</button>
-    //     </> 
-    // }
 
     return (
-        <div style={{backgroundColor: cardColor()}} className="todo">
+        <div style={{backgroundColor: addColor()}} className="todo">
 
             <div>
                 <button>{todo.priority}</button>
             </div>
 
-            {cardTitle}
+            <input type="text" defaultValue={todo.title} onChange={(e) => {
+                setTitle(e.target.value)
+            }} onBlur={() => handleEdit('title')}/>
 
             {checkboxes && <CheckboxContainer checkboxes={checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>} 
 
+            <input type="date" defaultValue={todo.dueDate} onChange={(e) => {
+                setDueDate(e.target.value)
+            }} onBlur={() => handleEdit('dueDate')}/>    
 
-            <div>due: {dueDate}</div>      
-            {cardBtn}
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>   
 
         </div>
     )
