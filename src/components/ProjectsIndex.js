@@ -21,7 +21,6 @@ export default function ProjectsIndex() {
     }, [])
 
     useEffect(() => {
-        console.log('here')
         localStorage.setItem('projects', JSON.stringify(projects))
     }, [projects])
 
