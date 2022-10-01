@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProjectCard({id, deleteItem}) {
+export default function ProjectCard({id}) {
 
     const navigate = useNavigate();
 
-    const [item, setItem] = useState([])
-    // const [title, setTitle] = useState(null);
-    // const [description, setDescription] = useState(null);
-
+    const [cardInfo, setCardInfo] = useState([])
 
     useEffect(() => {
         fetchProject()
+        console.log(cardInfo, 'in use effect')
     }, [])
 
     function fetchProject() {
@@ -20,44 +18,58 @@ export default function ProjectCard({id, deleteItem}) {
             if (project.id === id) return project
         })
         if (project) {
-            setItem(project)
+            setCardInfo(project)
         } else {
-            setItem([]);
+            setCardInfo([]);
         }
     }
 
     function openProject() {
-        navigate(`${item.id}`)
+        navigate(`${cardInfo.id}`)
     }
 
     function handleEdit() {
-        console.log(item, id)
+        console.log(cardInfo, id)
         let projects = JSON.parse(localStorage.getItem('projects'));
         console.log(projects)
         projects = projects.map(project => {
-            return (project.id === id )? item : project;
+            return (project.id === id )? cardInfo : project;
         })  
         console.log(projects) 
         localStorage.setItem('projects', JSON.stringify(projects))    
         fetchProject()
     }
 
-    return (
-        <div className="project">
-            <input type="text" defaultValue={item.title} onChange={(e) => {
-                setItem({
-                    ...item,
-                    title: e.target.value
-                })
-            }} onBlur={() => handleEdit('title')}/>
-            <input type="text" defaultValue={item.description} onChange={(e) => {
-                setItem({
-                    ...item,
-                    description: e.target.value
-                })
-            }} onBlur={() => handleEdit('description')}/>
-            <button onClick={openProject}>Open</button>
-            <button onClick={() => deleteItem(item.id)}>Delete</button>     
-        </div>
-    )
+    function deleteItem() {
+        let projects = JSON.parse(localStorage.getItem('projects'));
+        projects = projects.filter(project => {
+            return project.id !== cardInfo.id
+        })
+
+        localStorage.setItem('projects', JSON.stringify(projects))
+
+        fetchProject();
+    }
+
+    console.log(cardInfo, cardInfo.entries, 'outside')
+    if (cardInfo.title) {
+        return (
+            <div className="project">
+                <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
+                    setCardInfo({
+                        ...cardInfo,
+                        title: e.target.value
+                    })
+                }} onBlur={handleEdit}/>
+                <input type="text" defaultValue={cardInfo.description} onChange={(e) => {
+                    setCardInfo({
+                        ...cardInfo,
+                        description: e.target.value
+                    })
+                }} onBlur={handleEdit}/>
+                <button onClick={openProject}>Open</button>
+                <button onClick={() => deleteItem(cardInfo.id)}>Delete</button>     
+            </div>
+        )
+    }
 }

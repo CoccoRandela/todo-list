@@ -30,10 +30,6 @@ export default function ProjectsIndex() {
         setModal((modal === true)? false: true);
     }
 
-    // useEffect(() => {
-    //     console.log(projects.length, projects)
-    //     projects.length && localStorage.setItem('projects', JSON.stringify(projects))
-    // }, [projects])
 
     function addProject(inputs) {
         
@@ -49,35 +45,27 @@ export default function ProjectsIndex() {
             }
         ]
 
-        console.log(JSON.stringify(newProjects))
 
         localStorage.setItem('projects', JSON.stringify(newProjects))
 
         fetchProjects();
     }
 
-    function deleteProject(projectId) {
-        const newProjects = projects.filter(project => {
-            return project.id !== projectId
-        })
+    // function deleteProject(projectId) {
+    //     const newProjects = projects.filter(project => {
+    //         return project.id !== projectId
+    //     })
 
-        localStorage.setItem('projects', JSON.stringify(newProjects))
+    //     localStorage.setItem('projects', JSON.stringify(newProjects))
 
-        fetchProjects();
-    }
-
-    // function editProject(editablePrj) {
-
-    //     setProjects(projects.map(project => {
-    //         return editablePrj.id === project.id ? editablePrj : project;
-    //     }))
+    //     fetchProjects();
     // }
 
 
 
     const projectCards = projects.map(project => {
         return (
-            <ProjectCard id={project.id} deleteItem={deleteProject} key={project.id}/>
+            <ProjectCard id={project.id} key={project.id}/>
         )
     });
 
