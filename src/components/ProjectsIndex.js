@@ -12,36 +12,58 @@ export default function ProjectsIndex() {
     const [projects, setProjects] = useState([])
 
 
+    useEffect(() => {
+        fetchProjects();
+    }, [])
+
+    function fetchProjects() {
+        const response = JSON.parse(localStorage.getItem('projects'));
+        console.log(response)
+        if (response) {
+            setProjects(response)
+        } else {
+            setProjects([]);
+        }
+    }
+
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
 
-    useEffect(() => {
-        setProjects(JSON.parse(localStorage.getItem('projects')))
-    }, [])
-
-    useEffect(() => {
-        projects.length && localStorage.setItem('projects', JSON.stringify(projects))
-    }, [projects])
+    // useEffect(() => {
+    //     console.log(projects.length, projects)
+    //     projects.length && localStorage.setItem('projects', JSON.stringify(projects))
+    // }, [projects])
 
     function addProject(inputs) {
         
         const [ lastProject ] = projects.slice(-1);
 
         openCloseModal()
-        setProjects([
+
+        const newProjects = [
             ...projects, { 
                 id: lastProject ? lastProject.id + 1 : 0,
                 ...inputs,
                 todos: []
             }
-        ])
+        ]
+
+        console.log(JSON.stringify(newProjects))
+
+        localStorage.setItem('projects', JSON.stringify(newProjects))
+
+        fetchProjects();
     }
 
     function deleteProject(projectId) {
-        setProjects(projects.filter(project => {
+        const newProjects = projects.filter(project => {
             return project.id !== projectId
-        }))
+        })
+
+        localStorage.setItem('projects', JSON.stringify(newProjects))
+
+        fetchProjects();
     }
 
     // function editProject(editablePrj) {
@@ -54,7 +76,6 @@ export default function ProjectsIndex() {
 
 
     const projectCards = projects.map(project => {
-
         return (
             <ProjectCard id={project.id} deleteItem={deleteProject} key={project.id}/>
         )

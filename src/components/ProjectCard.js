@@ -5,29 +5,41 @@ export default function ProjectCard({id, deleteItem}) {
 
     const navigate = useNavigate();
 
-    let projects = JSON.parse(localStorage.getItem('projects'))
-    const [ project ] = projects.filter(project => {
-        if (project.id === id) return project
-    })
-
     const [item, setItem] = useState([])
     // const [title, setTitle] = useState(null);
     // const [description, setDescription] = useState(null);
 
 
     useEffect(() => {
-        setItem(project)
+        fetchProject()
     }, [])
 
-    useEffect(() => {
-        projects = projects.map(project => {
-            return project.id === id ? item : project;
+    function fetchProject() {
+        const response = JSON.parse(localStorage.getItem('projects'));
+        const [ project ] = response.filter(project => {
+            if (project.id === id) return project
         })
-        localStorage.setItem('projects', JSON.stringify(projects))
-    }, [item])
+        if (project) {
+            setItem(project)
+        } else {
+            setItem([]);
+        }
+    }
 
     function openProject() {
         navigate(`${item.id}`)
+    }
+
+    function handleEdit() {
+        console.log(item, id)
+        let projects = JSON.parse(localStorage.getItem('projects'));
+        console.log(projects)
+        projects = projects.map(project => {
+            return (project.id === id )? item : project;
+        })  
+        console.log(projects) 
+        localStorage.setItem('projects', JSON.stringify(projects))    
+        fetchProject()
     }
 
     return (
