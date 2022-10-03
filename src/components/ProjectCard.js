@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProjectCard({id}) {
+export default function ProjectCard({id, deleteProject}) {
 
     const navigate = useNavigate();
 
@@ -10,7 +10,19 @@ export default function ProjectCard({id}) {
     useEffect(() => {
         fetchProject()
         console.log(cardInfo, 'in use effect')
-    }, [])
+    }, [])    
+    
+    useEffect(() => {
+        if (Object.keys(cardInfo).length) {
+            let projects = JSON.parse(localStorage.getItem('projects'));
+            console.log(projects)
+            projects = projects.map(project => {
+                return (project.id === id )? cardInfo : project;
+            })  
+            console.log(projects) 
+            localStorage.setItem('projects', JSON.stringify(projects)) 
+        }
+    }, [cardInfo])
 
     function fetchProject() {
         const response = JSON.parse(localStorage.getItem('projects'));
@@ -28,48 +40,33 @@ export default function ProjectCard({id}) {
         navigate(`${cardInfo.id}`)
     }
 
-    function handleEdit() {
-        console.log(cardInfo, id)
-        let projects = JSON.parse(localStorage.getItem('projects'));
-        console.log(projects)
-        projects = projects.map(project => {
-            return (project.id === id )? cardInfo : project;
-        })  
-        console.log(projects) 
-        localStorage.setItem('projects', JSON.stringify(projects))    
-        fetchProject()
-    }
+    // function handleEdit() {
+    //     let projects = JSON.parse(localStorage.getItem('projects'));
+    //     console.log(projects)
+    //     projects = projects.map(project => {
+    //         return (project.id === id )? cardInfo : project;
+    //     })  
+    //     console.log(projects) 
+    //     localStorage.setItem('projects', JSON.stringify(projects))    
+    //     fetchProject()
+    // }
 
-    function deleteItem() {
-        let projects = JSON.parse(localStorage.getItem('projects'));
-        projects = projects.filter(project => {
-            return project.id !== cardInfo.id
-        })
-
-        localStorage.setItem('projects', JSON.stringify(projects))
-
-        fetchProject();
-    }
-
-    console.log(cardInfo, cardInfo.entries, 'outside')
-    if (cardInfo.title) {
-        return (
-            <div className="project">
-                <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
-                    setCardInfo({
-                        ...cardInfo,
-                        title: e.target.value
-                    })
-                }} onBlur={handleEdit}/>
-                <input type="text" defaultValue={cardInfo.description} onChange={(e) => {
-                    setCardInfo({
-                        ...cardInfo,
-                        description: e.target.value
-                    })
-                }} onBlur={handleEdit}/>
-                <button onClick={openProject}>Open</button>
-                <button onClick={() => deleteItem(cardInfo.id)}>Delete</button>     
-            </div>
-        )
-    }
+    return (
+        <div className="project">
+            <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
+                setCardInfo({
+                    ...cardInfo,
+                    title: e.target.value
+                })
+            }}/>
+            <input type="text" defaultValue={cardInfo.description} onChange={(e) => {
+                setCardInfo({
+                    ...cardInfo,
+                    description: e.target.value
+                })
+            }} />
+            <button onClick={openProject}>Open</button>
+            <button onClick={() => deleteProject(cardInfo.id)}>Delete</button>     
+        </div>
+    )
 }

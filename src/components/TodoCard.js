@@ -2,26 +2,55 @@ import React, { useState, useEffect } from "react";
 import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
-export default function TodoCard({ todo, editTodo, deleteTodo }) {
+export default function TodoCard({ id, projectId, editTodo, deleteTodo }) {
 
-    const [title, setTitle] = useState(todo.title);
-    const [dueDate, setDueDate] = useState(todo.dueDate);
-    const [priority, setPriority] = useState(todo.priority);
+    const [todoInfo, setTodoInfo] = useState({})
+    // const [title, setTitle] = useState(todo.title);
+    // const [dueDate, setDueDate] = useState(todo.dueDate);
+    // const [priority, setPriority] = useState(todo.priority);
     const [checkboxes, setCheckboxes] = useState([]);
 
 
     useEffect(() => {
-        setCheckboxes(todo.checkboxes)
+        console.log('inside')
+        fetchTodo()
     }, [])
 
     useEffect(() => {
-        console.log('here')
-        todo.checkboxes = [...checkboxes];
-        editTodo(todo)
-    }, [checkboxes])
+        // condition necessary to avoid use in first render and infinite loop
+        if(Object.keys(todoInfo).length) {       
+            console.log(todoInfo)
+            const projects = JSON.parse(localStorage.getItem('projects'));
+            console.log(projects)
+            const [ project ] = projects.filter(project => {
+                if (project.id === projectId) return project;
+            })
+            const todos = project.todos.map(todo => {
+                return (todo.id === id )? todoInfo : todo;
+            })
+            project.todos = todos;
+            localStorage.setItem('projects', JSON.stringify(projects)) 
+        }   
+    }, [todoInfo])
+
+    function fetchTodo() {
+        const response = JSON.parse(localStorage.getItem('projects'));
+        const [ project ] = response.filter(project => {
+            if (project.id === projectId) return project;
+        })
+        const [ todo ] = project.todos.filter(todo => {
+            if (todo.id === id) return todo;            
+        })
+        if(todo) {
+            console.log('here')
+            setTodoInfo(todo)
+        } else {
+            setTodoInfo({})
+        }
+    }
 
     function addColor() {
-        switch(todo.priority) {
+        switch(todoInfo.priority) {
             case 'low':
                 return 'green';
                 break;
@@ -35,31 +64,52 @@ export default function TodoCard({ todo, editTodo, deleteTodo }) {
     }
 
     function togglePriority() {
-        switch (priority) {
+        switch (todoInfo.priority) {
             case 'low':
-                setPriority('medium');
+                setTodoInfo({
+                    ...todoInfo,
+                    priority: 'medium'
+                });
                 break;
             case 'medium':
-                setPriority('high');
+                setTodoInfo({
+                    ...todoInfo,
+                    priority: 'high'
+                });
                 break;
             case 'high':
-                setPriority('low');
+                setTodoInfo({
+                    ...todoInfo,
+                    priority: 'low'
+                });
                 break;
         }
     }
 
-    function handleEdit(info) {
-        switch (info) {
-            case 'title':
-                todo.title = title;
-                break;
-            case 'dueDate':
-                todo.dueDate = dueDate;
-            case 'priority':
-                todo.priority = priority;
-        }
+    function handleEdit() {
+        // console.log(todoInfo)
+        // const projects = JSON.parse(localStorage.getItem('projects'));
+        // const [ project ] = projects.filter(project => {
+        //     if (project.id === projectId) return project;
+        // })
+        // const todos = project.todos.map(todo => {
+        //     return (todo.id === id )? todoInfo : todo;
+        // })
+        // project.todos = todos;
+        // // switch (info) {
+        // //     case 'title':
+        // //         todo.title = title;
+        // //         break;
+        // //     case 'dueDate':
+        // //         todo.dueDate = dueDate;
+        // //     case 'priority':
+        // //         todo.priority = priority;
+        // // }
 
-        editTodo(todo);
+        // localStorage.setItem('projects', JSON.stringify(projects))    
+        // fetchTodo()
+
+        // editTodo(todo);
     }
 
     function addCheckbox() {
@@ -86,26 +136,30 @@ export default function TodoCard({ todo, editTodo, deleteTodo }) {
 
     }
 
-
     return (
         <div style={{backgroundColor: addColor()}} className="todo">
 
             <div>
                 <button onClick={() => {
                     togglePriority()
-                    handleEdit('priority')
-                    }}>{todo.priority}</button>
+                    }}>{todoInfo.priority}</button>
             </div>
 
-            <input type="text" defaultValue={todo.title} onChange={(e) => {
-                setTitle(e.target.value)
-            }} onBlur={() => handleEdit('title')}/>
+            <input type="text" defaultValue={todoInfo.title} onChange={(e) => {
+                setTodoInfo({
+                    ...todoInfo,
+                    title: e.target.value
+                })
+            }}/>
+{/* 
+            {checkboxes && <CheckboxContainer checkboxes={checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>}  */}
 
-            {checkboxes && <CheckboxContainer checkboxes={checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>} 
-
-            <input type="date" defaultValue={todo.dueDate} onChange={(e) => {
-                setDueDate(e.target.value)
-            }} onBlur={() => handleEdit('dueDate')}/>    
+            <input type="date" defaultValue={todoInfo.dueDate} onChange={(e) => {
+                setTodoInfo({
+                    ...todoInfo,
+                    dueDate: e.target.value
+                })
+            }}/>    
 
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>   
 
