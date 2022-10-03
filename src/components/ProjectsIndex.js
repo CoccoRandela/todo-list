@@ -18,7 +18,6 @@ export default function ProjectsIndex() {
 
     function fetchProjects() {
         const response = JSON.parse(localStorage.getItem('projects'));
-        console.log(response)
         if (response) {
             setProjects(response)
         } else {
@@ -32,7 +31,8 @@ export default function ProjectsIndex() {
 
 
     function addProject(inputs) {
-        
+        console.log(projects)
+
         const [ lastProject ] = projects.slice(-1);
 
         openCloseModal()
@@ -51,21 +51,21 @@ export default function ProjectsIndex() {
         fetchProjects();
     }
 
-    // function deleteProject(projectId) {
-    //     const newProjects = projects.filter(project => {
-    //         return project.id !== projectId
-    //     })
+    function deleteProject(projectId) {
+        const newProjects = projects.filter(project => {
+            return project.id !== projectId
+        })
 
-    //     localStorage.setItem('projects', JSON.stringify(newProjects))
+        localStorage.setItem('projects', JSON.stringify(newProjects))
 
-    //     fetchProjects();
-    // }
+        fetchProjects();
+    }
 
 
 
     const projectCards = projects.map(project => {
         return (
-            <ProjectCard id={project.id} key={project.id}/>
+            <ProjectCard id={project.id} deleteProject={deleteProject} key={project.id}/>
         )
     });
 

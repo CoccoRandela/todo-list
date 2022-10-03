@@ -20,16 +20,24 @@ export default function Project() {
 
 
     useEffect(() => {
-        setTodos(project.todos)
+        fetchTodos()
     }, [])
 
-    useEffect(() => {
-        project.todos = [...todos]
-        localStorage.setItem('projects', JSON.stringify(projects))
-    }, [todos])
+    // useEffect(() => {
+    //     project.todos = [...todos]
+    //     localStorage.setItem('projects', JSON.stringify(projects))
+    // }, [todos])
     
+    function fetchTodos() {
+        const response = project.todos;
+        if (response) {
+            setTodos(response);
+        } else {
+            setTodos([])
+        }
+        
+    }
     
-
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
@@ -40,15 +48,19 @@ export default function Project() {
 
         openCloseModal()
 
-        setTodos([
+        const newTodos = [
             ...todos, { 
                 id: lastTodo ? lastTodo.id + 1 : 0,
                 ...inputs,
                 checkboxes: []
             }
-        ])
+        ]
 
-        console.log(project.todos, todos, 'in the create func')
+        project.todos = newTodos;
+
+        localStorage.setItem('projects', JSON.stringify(projects))
+
+        fetchTodos()
     }
 
     function deleteTodo(todoId) {
@@ -69,7 +81,7 @@ export default function Project() {
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard todo={todo} className="todo" editTodo={editTodo} deleteTodo={deleteTodo} key={todo.id}/>
+            <TodoCard id={todo.id} projectId={projectId} className="todo" editTodo={editTodo} deleteTodo={deleteTodo} key={todo.id}/>
         )
     })
 
