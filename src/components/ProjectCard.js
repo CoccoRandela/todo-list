@@ -13,6 +13,7 @@ export default function ProjectCard({id, deleteProject}) {
     }, [])    
     
     useEffect(() => {
+        // condition necessary to avoid use in first render and infinite loop
         if (Object.keys(cardInfo).length) {
             let projects = JSON.parse(localStorage.getItem('projects'));
             console.log(projects)

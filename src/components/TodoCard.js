@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
-export default function TodoCard({ id, projectId, editTodo, deleteTodo }) {
+export default function TodoCard({ id, projectId, deleteTodo }) {
 
     const [todoInfo, setTodoInfo] = useState({})
     // const [title, setTitle] = useState(todo.title);
@@ -161,7 +161,7 @@ export default function TodoCard({ id, projectId, editTodo, deleteTodo }) {
                 })
             }}/>    
 
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>   
+            <button onClick={() => deleteTodo(todoInfo.id)}>Delete</button>   
 
         </div>
     )

@@ -64,9 +64,16 @@ export default function Project() {
     }
 
     function deleteTodo(todoId) {
-        setTodos(todos.filter(todo => {
+        const newTodos = todos.filter(todo => {
             return todo.id !== todoId
-        }))
+        })
+
+        project.todos = newTodos;
+
+        localStorage.setItem('projects', JSON.stringify(projects))
+
+        fetchTodos()
+
     }
 
     function editTodo(editedTodo) {
