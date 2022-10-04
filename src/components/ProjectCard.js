@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProjectCard({id, deleteProject}) {
+export default function ProjectCard({projectInfo, deleteProject}) {
 
     const navigate = useNavigate();
 
-    const [cardInfo, setCardInfo] = useState([])
+    const [cardInfo, setCardInfo] = useState(projectInfo)
 
-    useEffect(() => {
-        fetchProject()
-        console.log(cardInfo, 'in use effect')
-    }, [])    
+    // useEffect(() => {
+    //     fetchProject()
+    // }, [])    
     
     useEffect(() => {
         // condition necessary to avoid use in first render and infinite loop
         if (Object.keys(cardInfo).length) {
-            let projects = JSON.parse(localStorage.getItem('projects'));
-            console.log(projects)
-            projects = projects.map(project => {
-                return (project.id === id )? cardInfo : project;
+            const projects = JSON.parse(localStorage.getItem('projects'));
+
+            const newProjects = projects.map(project => {
+                return (project.id === projectInfo.id )? cardInfo : project;
             })  
-            console.log(projects) 
-            localStorage.setItem('projects', JSON.stringify(projects)) 
+
+            localStorage.setItem('projects', JSON.stringify(newProjects)) 
         }
     }, [cardInfo])
 
     function fetchProject() {
         const response = JSON.parse(localStorage.getItem('projects'));
+        console.log(response, 'fetching project')
         const [ project ] = response.filter(project => {
             if (project.id === id) return project
         })
@@ -51,6 +51,8 @@ export default function ProjectCard({id, deleteProject}) {
     //     localStorage.setItem('projects', JSON.stringify(projects))    
     //     fetchProject()
     // }
+
+    console.log(cardInfo)
 
     return (
         <div className="project">

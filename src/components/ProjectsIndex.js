@@ -5,7 +5,6 @@ import ProjectCard from "./ProjectCard";
 
 
 export default function ProjectsIndex() {
-    console.log('inside pro ind')
 
     const [modal, setModal] = useState(false);
 
@@ -16,7 +15,16 @@ export default function ProjectsIndex() {
         fetchProjects();
     }, [])
 
+    useEffect(() => {
+        // condition necessary to avoid use in first render and infinite loop
+        // if(projects.length) {       
+            console.log('storing')
+            localStorage.setItem('projects', JSON.stringify(projects)) 
+        // }   
+    }, [projects])
+
     function fetchProjects() {
+        console.log('fetching')
         const response = JSON.parse(localStorage.getItem('projects'));
         if (response) {
             setProjects(response)
@@ -31,7 +39,6 @@ export default function ProjectsIndex() {
 
 
     function addProject(inputs) {
-        console.log(projects)
 
         const [ lastProject ] = projects.slice(-1);
 
@@ -45,10 +52,7 @@ export default function ProjectsIndex() {
             }
         ]
 
-
-        localStorage.setItem('projects', JSON.stringify(newProjects))
-
-        fetchProjects();
+        setProjects(newProjects)
     }
 
     function deleteProject(projectId) {
@@ -56,16 +60,15 @@ export default function ProjectsIndex() {
             return project.id !== projectId
         })
 
-        localStorage.setItem('projects', JSON.stringify(newProjects))
-
-        fetchProjects();
+        setProjects(newProjects)
     }
 
-
+    console.log(projects, 'before entering creation')
 
     const projectCards = projects.map(project => {
+        console.log('in creation')
         return (
-            <ProjectCard id={project.id} deleteProject={deleteProject} key={project.id}/>
+            <ProjectCard projectInfo={project} deleteProject={deleteProject} key={project.id}/>
         )
     });
 

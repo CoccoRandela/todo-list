@@ -26,7 +26,7 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
             const todos = project.todos.map(todo => {
                 return (todo.id === id )? todoInfo : todo;
             })
-            project.todos = todos;
+            project.todos = [...todos];
             localStorage.setItem('projects', JSON.stringify(projects)) 
         }   
     }, [todoInfo])
