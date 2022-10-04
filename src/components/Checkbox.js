@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Checkbox({ checkbox, editCheckbox }) {
+export default function Checkbox({ checkbox, editCheckbox, deleteCheckbox }) {
 
     const [checkboxInfo, setCheckboxInfo] = useState(checkbox)
 
@@ -22,7 +22,9 @@ export default function Checkbox({ checkbox, editCheckbox }) {
                 task: e.target.value
             })
         }}/>
-        <button>Delete</button>
+        <button onClick={() => {
+            deleteCheckbox(checkbox.id)
+        }}>Delete</button>
         </div>
     )
 }

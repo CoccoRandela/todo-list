@@ -127,6 +127,19 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
         )
     }
 
+    function deleteCheckbox(checkboxId) {
+
+        const newCheckboxes = todoInfo.checkboxes.filter(checkbox => 
+            checkbox.id !== checkboxId
+        )
+
+        setTodoInfo(
+            {...todoInfo,
+            checkboxes: newCheckboxes
+            }
+        )
+    }
+
     function editCheckbox(editedCheckbox) {
 
         console.log(editedCheckbox)
@@ -159,7 +172,7 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
                 })
             }}/>
 
-            {todoInfo.checkboxes && <CheckboxContainer checkboxes={todoInfo.checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>} 
+            {todoInfo.checkboxes && <CheckboxContainer checkboxes={todoInfo.checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox} deleteCheckbox={deleteCheckbox}/>} 
 
             <input type="date" defaultValue={todoInfo.dueDate} onChange={(e) => {
                 setTodoInfo({
