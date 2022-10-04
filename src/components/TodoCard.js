@@ -2,34 +2,34 @@ import React, { useState, useEffect } from "react";
 import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
-export default function TodoCard({ id, projectId, deleteTodo }) {
+export default function TodoCard({ todoInfo, projectId, deleteTodo }) {
 
-    const [todoInfo, setTodoInfo] = useState({})
+    const [cardInfo, setCardInfo] = useState(todoInfo)
     // const [title, setTitle] = useState(todo.title);
     // const [dueDate, setDueDate] = useState(todo.dueDate);
     // const [priority, setPriority] = useState(todo.priority);
     // const [checkboxes, setCheckboxes] = useState([]);
 
 
-    useEffect(() => {
-        console.log('inside')
-        fetchTodo()
-    }, [])
+    // useEffect(() => {
+    //     console.log('inside')
+    //     fetchTodo()
+    // }, [])
 
     useEffect(() => {
         // condition necessary to avoid use in first render and infinite loop
-        if(Object.keys(todoInfo).length) {       
+        // if(Object.keys(cardInfo).length) {       
             const projects = JSON.parse(localStorage.getItem('projects'));
             const [ project ] = projects.filter(project => {
                 if (project.id === projectId) return project;
             })
             const todos = project.todos.map(todo => {
-                return (todo.id === id )? todoInfo : todo;
+                return (todo.id === todoInfo.id )? cardInfo : todo;
             })
             project.todos = [...todos];
             localStorage.setItem('projects', JSON.stringify(projects)) 
-        }   
-    }, [todoInfo])
+        // }   
+    }, [cardInfo])
 
     function fetchTodo() {
         const response = JSON.parse(localStorage.getItem('projects'));
@@ -41,14 +41,14 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
         })
         if(todo) {
             console.log('here')
-            setTodoInfo(todo)
+            setCardInfo(todo)
         } else {
-            setTodoInfo({})
+            setCardInfo({})
         }
     }
 
     function addColor() {
-        switch(todoInfo.priority) {
+        switch(cardInfo.priority) {
             case 'low':
                 return 'green';
                 break;
@@ -62,22 +62,22 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
     }
 
     function togglePriority() {
-        switch (todoInfo.priority) {
+        switch (cardInfo.priority) {
             case 'low':
-                setTodoInfo({
-                    ...todoInfo,
+                setCardInfo({
+                    ...cardInfo,
                     priority: 'medium'
                 });
                 break;
             case 'medium':
-                setTodoInfo({
-                    ...todoInfo,
+                setCardInfo({
+                    ...cardInfo,
                     priority: 'high'
                 });
                 break;
             case 'high':
-                setTodoInfo({
-                    ...todoInfo,
+                setCardInfo({
+                    ...cardInfo,
                     priority: 'low'
                 });
                 break;
@@ -111,12 +111,12 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
     }
 
     function addCheckbox() {
-        const [ lastCheckbox ] = todoInfo.checkboxes.slice(-1);
+        const [ lastCheckbox ] = cardInfo.checkboxes.slice(-1);
     
-        setTodoInfo(
-            {...todoInfo,
+        setCardInfo(
+            {...cardInfo,
             checkboxes: 
-                [...todoInfo.checkboxes,
+                [...cardInfo.checkboxes,
                     { 
                     id: lastCheckbox ? lastCheckbox.id + 1 : 0,
                     completed: false,
@@ -129,12 +129,12 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
 
     function deleteCheckbox(checkboxId) {
 
-        const newCheckboxes = todoInfo.checkboxes.filter(checkbox => 
+        const newCheckboxes = cardInfo.checkboxes.filter(checkbox => 
             checkbox.id !== checkboxId
         )
 
-        setTodoInfo(
-            {...todoInfo,
+        setCardInfo(
+            {...cardInfo,
             checkboxes: newCheckboxes
             }
         )
@@ -144,12 +144,12 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
 
         console.log(editedCheckbox)
 
-        const newCheckboxes = todoInfo.checkboxes.map(checkbox => {
+        const newCheckboxes = cardInfo.checkboxes.map(checkbox => {
             return checkbox.id === editedCheckbox.id? editedCheckbox : checkbox;
         })
 
-        setTodoInfo(
-            {...todoInfo,
+        setCardInfo(
+            {...cardInfo,
             checkboxes: newCheckboxes
             }
         )
@@ -162,26 +162,26 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
             <div>
                 <button onClick={() => {
                     togglePriority()
-                    }}>{todoInfo.priority}</button>
+                    }}>{cardInfo.priority}</button>
             </div>
 
-            <input type="text" defaultValue={todoInfo.title} onChange={(e) => {
-                setTodoInfo({
-                    ...todoInfo,
+            <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
+                setCardInfo({
+                    ...cardInfo,
                     title: e.target.value
                 })
             }}/>
 
-            {todoInfo.checkboxes && <CheckboxContainer checkboxes={todoInfo.checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox} deleteCheckbox={deleteCheckbox}/>} 
+            {cardInfo.checkboxes && <CheckboxContainer checkboxes={cardInfo.checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox} deleteCheckbox={deleteCheckbox}/>} 
 
-            <input type="date" defaultValue={todoInfo.dueDate} onChange={(e) => {
-                setTodoInfo({
-                    ...todoInfo,
+            <input type="date" defaultValue={cardInfo.dueDate} onChange={(e) => {
+                setCardInfo({
+                    ...cardInfo,
                     dueDate: e.target.value
                 })
             }}/>    
 
-            <button onClick={() => deleteTodo(todoInfo.id)}>Delete</button>   
+            <button onClick={() => deleteTodo(cardInfo.id)}>Delete</button>   
 
         </div>
     )

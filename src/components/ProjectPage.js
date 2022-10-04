@@ -1,5 +1,5 @@
 import React,{ useState, useEffect }from "react";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import ModalForm from "./ModalForm";
 import TodoCard from "./TodoCard";
 import arrayComp from "../arraycomp";
@@ -7,12 +7,9 @@ import arrayComp from "../arraycomp";
 export default function Project() {
     console.log('render projct page')
 
-    const params = useParams();
-    const projectId = Number(params.id);
-
-    const  projects = JSON.parse(localStorage.getItem('projects'));
-
-    const [ project ] = projects.filter(project => project.id === projectId)
+    // const params = useParams();
+    // const projectId = Number(params.id);
+    const {state} = useLocation()
 
 
     const [modal, setModal] = useState(false);
@@ -23,12 +20,17 @@ export default function Project() {
         fetchTodos()
     }, [])
 
-    // useEffect(() => {
-    //     project.todos = [...todos]
-    //     localStorage.setItem('projects', JSON.stringify(projects))
-    // }, [todos])
+    useEffect(() => {
+        const  projects = JSON.parse(localStorage.getItem('projects'));
+        const [ project ] = projects.filter(project => project.id === state.id)
+        project.todos = [...todos]
+        localStorage.setItem('projects', JSON.stringify(projects))
+    }, [todos])
     
+
     function fetchTodos() {
+        const  projects = JSON.parse(localStorage.getItem('projects'));
+        const [ project ] = projects.filter(project => project.id === state.id)
         const response = project.todos;
         if (response) {
             setTodos(response);
@@ -56,11 +58,13 @@ export default function Project() {
             }
         ]
 
-        project.todos = newTodos;
+        setTodos(newTodos)
 
-        localStorage.setItem('projects', JSON.stringify(projects))
+        // project.todos = newTodos;
 
-        fetchTodos()
+        // localStorage.setItem('projects', JSON.stringify(projects))
+
+        // fetchTodos()
     }
 
     function deleteTodo(todoId) {
@@ -68,11 +72,11 @@ export default function Project() {
             return todo.id !== todoId
         })
 
-        project.todos = newTodos;
+        setTodos(newTodos);
 
-        localStorage.setItem('projects', JSON.stringify(projects))
+        // localStorage.setItem('projects', JSON.stringify(projects))
 
-        fetchTodos()
+        // fetchTodos()
 
     }
 
@@ -88,7 +92,7 @@ export default function Project() {
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard id={todo.id} projectId={projectId} className="todo" deleteTodo={deleteTodo} key={todo.id}/>
+            <TodoCard todoInfo={todo} projectId={state.id} className="todo" deleteTodo={deleteTodo} key={todo.id}/>
         )
     })
 
@@ -97,7 +101,7 @@ export default function Project() {
             {modal && <ModalForm item="todo" className="modal prj-mod" options={['title', 'dueDate', 'priority']} addItem={addTodo} closeModal={openCloseModal}/>}
 
             <header className="prj-head">    
-                <h1>{project.title}</h1>
+                <h1>{state.title}</h1>
                 <button className="add-todo-btn" onClick={openCloseModal}>+</button>
             </header>
 

@@ -38,7 +38,7 @@ export default function ProjectCard({projectInfo, deleteProject}) {
     }
 
     function openProject() {
-        navigate(`${cardInfo.id}`)
+        navigate(`${cardInfo.id}`, {state: cardInfo})
     }
 
     // function handleEdit() {
