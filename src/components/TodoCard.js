@@ -21,7 +21,7 @@ export default function TodoCard({ todoInfo, projectId, deleteTodo }) {
         // if(Object.keys(cardInfo).length) {       
             const projects = JSON.parse(localStorage.getItem('projects'));
             const [ project ] = projects.filter(project => {
-                if (project.id === projectId) return project;
+                if (project.id === todoInfo.prjId) return project;
             })
             const todos = project.todos.map(todo => {
                 return (todo.id === todoInfo.id )? cardInfo : todo;

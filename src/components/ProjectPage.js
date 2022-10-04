@@ -52,7 +52,7 @@ export default function Project() {
 
         const newTodos = [
             ...todos, { 
-                project: state.title,
+                prjId: state.id,
                 id: lastTodo ? lastTodo.id + 1 : 0,
                 ...inputs,
                 checkboxes: []
