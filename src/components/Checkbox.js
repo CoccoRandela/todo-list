@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 
 export default function Checkbox({ checkbox, editCheckbox }) {
-    console.log(checkbox)
 
-    const [task, setTask] = useState(checkbox.task)
+    const [checkboxInfo, setCheckboxInfo] = useState(checkbox)
 
     useEffect(() => {
-        checkbox.task = task;
-    }, [task])
+        editCheckbox(checkboxInfo)
+    }, [checkboxInfo])
 
     return (
         <div className="checkbox" key={checkbox.id}>
-        <input type="checkbox" /> 
-        <input type="text" defaultValue={checkbox.task}onChange={(e => {
-            setTask(e.target.value)
-        })} onBlur={() => editCheckbox(checkbox)}/>
+        <input type="checkbox" defaultChecked={(checkbox.completed === true &&'checked')} onChange={() => {
+            setCheckboxInfo({
+                ...checkboxInfo,
+                completed : !checkbox.completed
+            })
+        }}/> 
+        <input type="text" defaultValue={checkbox.task}onChange={(e) => {
+            setCheckboxInfo({
+                ...checkboxInfo,
+                task: e.target.value
+            })
+        }}/>
+        <button>Delete</button>
         </div>
     )
 }

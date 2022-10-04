@@ -8,7 +8,7 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
     // const [title, setTitle] = useState(todo.title);
     // const [dueDate, setDueDate] = useState(todo.dueDate);
     // const [priority, setPriority] = useState(todo.priority);
-    const [checkboxes, setCheckboxes] = useState([]);
+    // const [checkboxes, setCheckboxes] = useState([]);
 
 
     useEffect(() => {
@@ -19,9 +19,7 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
     useEffect(() => {
         // condition necessary to avoid use in first render and infinite loop
         if(Object.keys(todoInfo).length) {       
-            console.log(todoInfo)
             const projects = JSON.parse(localStorage.getItem('projects'));
-            console.log(projects)
             const [ project ] = projects.filter(project => {
                 if (project.id === projectId) return project;
             })
@@ -113,26 +111,35 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
     }
 
     function addCheckbox() {
-        
-        const [ lastCheckbox ] = checkboxes.slice(-1);
-
-        setCheckboxes([
-            ...checkboxes, { 
-                id: lastCheckbox ? lastCheckbox.id + 1 : 0,
-                completed: false,
-                task: '',
+        const [ lastCheckbox ] = todoInfo.checkboxes.slice(-1);
+    
+        setTodoInfo(
+            {...todoInfo,
+            checkboxes: 
+                [...todoInfo.checkboxes,
+                    { 
+                    id: lastCheckbox ? lastCheckbox.id + 1 : 0,
+                    completed: false,
+                    task: '',
+                    }
+                ]
             }
-        ])
-
+        )
     }
 
     function editCheckbox(editedCheckbox) {
 
         console.log(editedCheckbox)
 
-        setCheckboxes(checkboxes.map(checkbox => {
+        const newCheckboxes = todoInfo.checkboxes.map(checkbox => {
             return checkbox.id === editedCheckbox.id? editedCheckbox : checkbox;
-        }))
+        })
+
+        setTodoInfo(
+            {...todoInfo,
+            checkboxes: newCheckboxes
+            }
+        )
 
     }
 
@@ -151,8 +158,8 @@ export default function TodoCard({ id, projectId, deleteTodo }) {
                     title: e.target.value
                 })
             }}/>
-{/* 
-            {checkboxes && <CheckboxContainer checkboxes={checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>}  */}
+
+            {todoInfo.checkboxes && <CheckboxContainer checkboxes={todoInfo.checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox}/>} 
 
             <input type="date" defaultValue={todoInfo.dueDate} onChange={(e) => {
                 setTodoInfo({

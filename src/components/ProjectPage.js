@@ -76,19 +76,19 @@ export default function Project() {
 
     }
 
-    function editTodo(editedTodo) {
+    // function editTodo(editedTodo) {
 
-        setTodos(todos.map(todo => {
-            return todo.id === editedTodo.id? editedTodo : todo;
-        }))
+    //     setTodos(todos.map(todo => {
+    //         return todo.id === editedTodo.id? editedTodo : todo;
+    //     }))
 
-        console.log(project.todos, todos, 'in the edit func')
+    //     console.log(project.todos, todos, 'in the edit func')
 
-    }
+    // }
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard id={todo.id} projectId={projectId} className="todo" editTodo={editTodo} deleteTodo={deleteTodo} key={todo.id}/>
+            <TodoCard id={todo.id} projectId={projectId} className="todo" deleteTodo={deleteTodo} key={todo.id}/>
         )
     })
 

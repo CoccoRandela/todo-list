@@ -4,7 +4,6 @@ import Checkbox from "./Checkbox";
 
 export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbox }) {
 
-
     const [boxActive, setBoxActive] = useState(false)
 
 
