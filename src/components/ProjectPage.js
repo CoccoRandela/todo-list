@@ -15,7 +15,7 @@ export default function Project() {
     const [modal, setModal] = useState(false);
     const [todos, setTodos] = useState([])
 
-
+    console.log(todos)
     useEffect(() => {
         fetchTodos()
     }, [])
@@ -52,6 +52,7 @@ export default function Project() {
 
         const newTodos = [
             ...todos, { 
+                project: state.title,
                 id: lastTodo ? lastTodo.id + 1 : 0,
                 ...inputs,
                 checkboxes: []

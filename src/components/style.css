@@ -113,3 +113,8 @@ div.todo > .c-box-cont {
 .c-box-cont > header > h4 {
     margin: 0;
 }
+
+
+.react-calendar__tile.filled {
+    background-color: red;
+}
