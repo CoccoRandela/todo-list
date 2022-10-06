@@ -1,51 +1,22 @@
 import React, { useState, useEffect } from "react";
-import arrayComp from "../arraycomp";
 import CheckboxContainer from "./CheckboxContainer";
 
-export default function TodoCard({ todoInfo, projectId, deleteTodo }) {
+export default function TodoCard({ todoInfo, deleteTodo }) {
 
     const [cardInfo, setCardInfo] = useState(todoInfo)
-    // const [title, setTitle] = useState(todo.title);
-    // const [dueDate, setDueDate] = useState(todo.dueDate);
-    // const [priority, setPriority] = useState(todo.priority);
-    // const [checkboxes, setCheckboxes] = useState([]);
-
-
-    // useEffect(() => {
-    //     console.log('inside')
-    //     fetchTodo()
-    // }, [])
 
     useEffect(() => {
-        // condition necessary to avoid use in first render and infinite loop
-        // if(Object.keys(cardInfo).length) {       
-            const projects = JSON.parse(localStorage.getItem('projects'));
-            const [ project ] = projects.filter(project => {
-                if (project.id === todoInfo.prjId) return project;
-            })
-            const todos = project.todos.map(todo => {
-                return (todo.id === todoInfo.id )? cardInfo : todo;
-            })
-            project.todos = [...todos];
-            localStorage.setItem('projects', JSON.stringify(projects)) 
-        // }   
+        const projects = JSON.parse(localStorage.getItem('projects'));
+        const [ project ] = projects.filter(project => {
+            if (project.id === todoInfo.prjId) return project;
+        })
+        const todos = project.todos.map(todo => {
+            return (todo.id === todoInfo.id )? cardInfo : todo;
+        })
+        project.todos = [...todos];
+        localStorage.setItem('projects', JSON.stringify(projects)) 
     }, [cardInfo])
 
-    function fetchTodo() {
-        const response = JSON.parse(localStorage.getItem('projects'));
-        const [ project ] = response.filter(project => {
-            if (project.id === projectId) return project;
-        })
-        const [ todo ] = project.todos.filter(todo => {
-            if (todo.id === id) return todo;            
-        })
-        if(todo) {
-            console.log('here')
-            setCardInfo(todo)
-        } else {
-            setCardInfo({})
-        }
-    }
 
     function addColor() {
         switch(cardInfo.priority) {
@@ -82,32 +53,6 @@ export default function TodoCard({ todoInfo, projectId, deleteTodo }) {
                 });
                 break;
         }
-    }
-
-    function handleEdit() {
-        // console.log(todoInfo)
-        // const projects = JSON.parse(localStorage.getItem('projects'));
-        // const [ project ] = projects.filter(project => {
-        //     if (project.id === projectId) return project;
-        // })
-        // const todos = project.todos.map(todo => {
-        //     return (todo.id === id )? todoInfo : todo;
-        // })
-        // project.todos = todos;
-        // // switch (info) {
-        // //     case 'title':
-        // //         todo.title = title;
-        // //         break;
-        // //     case 'dueDate':
-        // //         todo.dueDate = dueDate;
-        // //     case 'priority':
-        // //         todo.priority = priority;
-        // // }
-
-        // localStorage.setItem('projects', JSON.stringify(projects))    
-        // fetchTodo()
-
-        // editTodo(todo);
     }
 
     function addCheckbox() {

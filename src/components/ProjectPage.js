@@ -5,17 +5,12 @@ import TodoCard from "./TodoCard";
 import arrayComp from "../arraycomp";
 
 export default function Project() {
-    console.log('render projct page')
 
-    // const params = useParams();
-    // const projectId = Number(params.id);
     const {state} = useLocation()
-
 
     const [modal, setModal] = useState(false);
     const [todos, setTodos] = useState([])
 
-    console.log(todos)
     useEffect(() => {
         fetchTodos()
     }, [])
@@ -45,11 +40,8 @@ export default function Project() {
     }
 
     function addTodo(inputs) {
-
         const [ lastTodo ] = todos.slice(-1);
-
         openCloseModal()
-
         const newTodos = [
             ...todos, { 
                 prjId: state.id,
@@ -58,38 +50,15 @@ export default function Project() {
                 checkboxes: []
             }
         ]
-
         setTodos(newTodos)
-
-        // project.todos = newTodos;
-
-        // localStorage.setItem('projects', JSON.stringify(projects))
-
-        // fetchTodos()
     }
 
     function deleteTodo(todoId) {
         const newTodos = todos.filter(todo => {
             return todo.id !== todoId
         })
-
         setTodos(newTodos);
-
-        // localStorage.setItem('projects', JSON.stringify(projects))
-
-        // fetchTodos()
-
     }
-
-    // function editTodo(editedTodo) {
-
-    //     setTodos(todos.map(todo => {
-    //         return todo.id === editedTodo.id? editedTodo : todo;
-    //     }))
-
-    //     console.log(project.todos, todos, 'in the edit func')
-
-    // }
 
     const todoCards = todos.map(todo => {
         return (
@@ -109,6 +78,7 @@ export default function Project() {
             <div className="todos">
                 {todoCards}
             </div>    
+            
         </div>
     )
 }

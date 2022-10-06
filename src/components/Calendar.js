@@ -28,13 +28,14 @@ export default function CalendarPage() {
     }
 
     function displayTodos(value) {
-        console.log(value)
         const projects = JSON.parse(localStorage.getItem('projects'))
+        console.log(projects)
         let contentToDisplay = [];
         projects.forEach(project => {
-            const todos = project.todos;
+            const todos = [...project.todos];
             todos.forEach(todo => contentToDisplay.push(todo))
         }) 
+        console.log(contentToDisplay, 'content')
         contentToDisplay.forEach(el => {
             if(dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(value).format()) {
                 setModal(true)
@@ -42,20 +43,37 @@ export default function CalendarPage() {
         })
         const cards = contentToDisplay.map(el => {
             if(dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(value).format()) {
-                return <TodoCard todoInfo={el} />
+                return <TodoCard todoInfo={el} key={contentToDisplay.indexOf(el)}deleteTodo={() => deleteTodo(el, value)}/>
             }
         })
 
         setModalContent(cards)
+
+        return cards;
         
     }    
+
+    function deleteTodo(el, value) {
+        const projects = JSON.parse(localStorage.getItem('projects')); 
+        const [ project ] = projects.filter(
+            project => project.id === el.prjId
+            )
+        console.log(project, 'project')
+        project.todos = project.todos.filter(todo => todo.id !== el.id)
+        console.log(projects)
+        localStorage.setItem('projects', JSON.stringify(projects))
+        displayTodos(value);
+        setModal(false);
+    }
 
 
     return (
         <>
         {modal && <div className="modal">
-                <button onClick={() => setModal(false)}>Back</button>
-                {modalContent}
+                <div className="day-content">
+                    <button onClick={() => setModal(false)}>Back</button>
+                    {modalContent}
+                </div>
             </div>}
         <Calendar tileClassName={assignClass}
         onClickDay={displayTodos}/>

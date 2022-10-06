@@ -15,13 +15,12 @@ export default function ProjectsIndex() {
         fetchProjects();
     }, [])
 
-    useEffect(() => {
-        // condition necessary to avoid use in first render and infinite loop
-        // if(projects.length) {       
+
+    useEffect(() => {       
             console.log('storing')
-            localStorage.setItem('projects', JSON.stringify(projects)) 
-        // }   
+            localStorage.setItem('projects', JSON.stringify(projects))    
     }, [projects])
+
 
     function fetchProjects() {
         console.log('fetching')
@@ -33,17 +32,15 @@ export default function ProjectsIndex() {
         }
     }
 
+
     function openCloseModal() {
         setModal((modal === true)? false: true);
     }
 
 
     function addProject(inputs) {
-
         const [ lastProject ] = projects.slice(-1);
-
-        openCloseModal()
-
+        openCloseModal();
         const newProjects = [
             ...projects, { 
                 id: lastProject ? lastProject.id + 1 : 0,
@@ -51,7 +48,6 @@ export default function ProjectsIndex() {
                 todos: []
             }
         ]
-
         setProjects(newProjects)
     }
 
@@ -59,11 +55,9 @@ export default function ProjectsIndex() {
         const newProjects = projects.filter(project => {
             return project.id !== projectId
         })
-
         setProjects(newProjects)
     }
 
-    console.log(projects, 'before entering creation')
 
     const projectCards = projects.map(project => {
         console.log('in creation')
@@ -71,6 +65,7 @@ export default function ProjectsIndex() {
             <ProjectCard projectInfo={project} deleteProject={deleteProject} key={project.id}/>
         )
     });
+    
 
     return (
         <div className="index">
