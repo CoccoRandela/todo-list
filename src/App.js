@@ -1,17 +1,13 @@
 import React from "react";
-import { Outlet } from "react-router";
-import { Navbar } from "./components";
+import { Routes, Route } from "react-router";
+import { Wrapper } from "./components";
 import "./App.css";
 
 
 export default function App() {
     return (
-        <>
-            <header>
-                <h2>BetterLate</h2>
-            </header>
-            <Navbar/>
-            <Outlet/>            
-        </> 
+        <Routes>
+            <Route path="/*" element={<Wrapper />} />
+        </Routes>
     )    
 }
