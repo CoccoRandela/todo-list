@@ -1,8 +1,17 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import {Calendar, Navbar, ProjectPage, ProjectsIndex} from "./index";
 
 export default function Wrapper() {
+    const [user, setUser] = useState({})
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!user) {
+            navigate('/login')
+        }
+    }, [])   
+
     return (
         <>
         <header>
