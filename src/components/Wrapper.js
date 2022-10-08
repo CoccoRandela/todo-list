@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import {Calendar, Navbar, ProjectPage, ProjectsIndex} from "./index";
 
 export default function Wrapper() {
@@ -10,6 +10,7 @@ export default function Wrapper() {
         </header>
         <Navbar/>
         <Routes>
+            <Route path="/" element={<Navigate to='/projects' />} />
             <Route path="/projects" element={<ProjectsIndex />} />
             <Route path="/project/:id" element={<ProjectPage />} />
             <Route path="/calendar" element={<Calendar/>} />
