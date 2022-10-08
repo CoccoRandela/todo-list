@@ -7,13 +7,13 @@ export default function Wrapper() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!user) {
+        if(!user.name) {
             navigate('/login')
         }
     }, [])   
 
     return (
-        <>
+        user.name && <>
         <header>
             <h2>BetterLate</h2>
         </header>

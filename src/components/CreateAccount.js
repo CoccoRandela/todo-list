@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function CreateAccount() {
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
 
-    function login(e) {
+    function createUser(e) {
         e.preventDefault();
 
     }
 
     return (
         <div className="modal">
-            <form onSubmit={login}>
+            <form onSubmit={createUser}>
                 <label>
                     email
                     <input type='email' defaultValue='' onChange={(e) => {
@@ -24,10 +23,9 @@ export default function Login() {
                     <input type='password' defaultValue='' onChange={(e) => {
                         setPassword(e.target.value)
                     }}/>
-                </label> 
-                <button type="submit">Login</button>         
+                </label>
+                <button type="submit">Create Account</button>          
             </form>
-            <span>New User?<Link to='/create-account'>Create Account</Link> </span>
         </div>
     )
 }
