@@ -1,17 +1,27 @@
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../services/firebase";
+import { useNavigate } from "react-router-dom";
+
 
 export default function CreateAccount() {
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
 
-    function createUser(e) {
+    const navigate = useNavigate();
+
+    function register(e) {
         e.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+            navigate('/')          
+        })
 
     }
 
     return (
         <div className="modal">
-            <form onSubmit={createUser}>
+            <form onSubmit={register}>
                 <label>
                     email
                     <input type='email' defaultValue='' onChange={(e) => {

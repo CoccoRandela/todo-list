@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import {Calendar, Navbar, ProjectPage, ProjectsIndex} from "./index";
+import { auth } from "../services/firebase";
 
 export default function Wrapper() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState()
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!user.name) {
+        if(!auth.currentUser) {
             navigate('/login')
+        } else {
+            setUser(auth.currentUser)
         }
     }, [])   
 
     return (
-        user.name && <>
+        <>
         <header>
             <h2>BetterLate</h2>
         </header>
