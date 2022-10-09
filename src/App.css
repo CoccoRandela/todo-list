@@ -16,7 +16,7 @@ body {
 }
 
 header > h2 {
-    text-align: center;
+    justify-self: center;
     margin: 0;
     margin-top: .5em;
 }

@@ -3,8 +3,6 @@ import { createUserWithEmailAndPassword, connectAuthEmulator } from 'firebase/au
 import { auth } from "../services/firebase";
 import { useNavigate } from "react-router-dom";
 
-connectAuthEmulator(auth, 'http://localhost:9099')
-
 export default function CreateAccount() {
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);

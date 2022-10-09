@@ -1,5 +1,11 @@
-/* Navbar */
+/* Header */
+header.main-header {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+}
 
+/* Navbar */
 nav.navbar {
     display: flex;
     justify-content: center;

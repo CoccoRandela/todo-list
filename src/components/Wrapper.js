@@ -1,24 +1,42 @@
+//React Imports
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import {Calendar, Navbar, ProjectPage, ProjectsIndex} from "./index";
+//Components
+import { Calendar, Navbar, ProjectPage, ProjectsIndex } from "./index";
+//Firebase
 import { auth } from "../services/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Wrapper() {
     const [user, setUser] = useState()
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!auth.currentUser) {
-            navigate('/login')
-        } else {
-            setUser(auth.currentUser)
-        }
-    }, [])   
+        fetchUser()
+    }, [])
+    
+    function fetchUser() {
+        onAuthStateChanged(auth, (currentUser) => {
+            if(currentUser) {
+                setUser(currentUser)            
+            } else {
+                navigate('/login')            
+            }
+        }) 
+    }
+    
+    function logout() {
+        signOut(auth)
+        .then((response) => {
+            fetchUser()
+        })
+    }
 
     return (
         <>
-        <header>
+        <header className="main-header">
             <h2>BetterLate</h2>
+            <button onClick={logout}>Sign Out</button>
         </header>
         <Navbar/>
         <Routes>
