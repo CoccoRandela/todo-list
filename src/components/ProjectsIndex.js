@@ -1,6 +1,13 @@
+// React imports
 import React, {useEffect, useState} from "react";
 import ModalForm from "./ModalForm";
+
+//Components
 import ProjectCard from "./ProjectCard";
+
+//Firebase imports
+import { db } from "../services/firebase";
+import { collection, getDocs } from 'firebase/firestore'
 
 
 
@@ -23,13 +30,21 @@ export default function ProjectsIndex() {
 
 
     function fetchProjects() {
-        console.log('fetching')
-        const response = JSON.parse(localStorage.getItem('projects'));
-        if (response) {
-            setProjects(response)
-        } else {
-            setProjects([]);
-        }
+        const prjCol = collection(db, 'projects')
+        getDocs(prjCol)
+        .then(response => {
+            const projects =[];
+            response.docs.map(doc => {
+                projects.push({ ...doc.data(), id: doc.id })
+            })
+            setProjects(projects)
+        })
+        // const response = JSON.parse(localStorage.getItem('projects'));
+        // if (response) {
+            
+        // } else {
+        //     setProjects([]);
+        // }
     }
 
 

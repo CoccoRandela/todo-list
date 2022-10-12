@@ -33,18 +33,18 @@ export default function Wrapper() {
     }
 
     return (
-        <>
-        <header className="main-header">
-            <h2>BetterLate</h2>
-            <button onClick={logout}>Sign Out</button>
-        </header>
-        <Navbar/>
-        <Routes>
-            <Route path="/" element={<Navigate to='/projects' />} />
-            <Route path="/projects" element={<ProjectsIndex />} />
-            <Route path="/project/:id" element={<ProjectPage />} />
-            <Route path="/calendar" element={<Calendar/>} />
-        </Routes>           
-    </> 
+        user && <>
+            <header className="main-header">
+                <h2>BetterLate</h2>
+                <button onClick={logout}>Sign Out</button>
+            </header>
+            <Navbar/>
+            <Routes>
+                <Route path="/" element={<Navigate to='/projects' />} />
+                <Route path="/projects" element={<ProjectsIndex />} />
+                <Route path="/project/:id" element={<ProjectPage />} />
+                <Route path="/calendar" element={<Calendar/>} />
+            </Routes>           
+        </> 
     )
 }

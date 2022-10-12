@@ -1,7 +1,12 @@
+// React Imports
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, connectAuthEmulator } from 'firebase/auth'
-import { auth } from "../services/firebase";
 import { useNavigate } from "react-router-dom";
+//Firebase Imports
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth, db } from "../services/firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
+
+
 
 export default function CreateAccount() {
     const [email, setEmail] = useState([]);
@@ -12,7 +17,11 @@ export default function CreateAccount() {
     function register(e) {
         e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((credentials) => {
+            setDoc(doc(db, 'users', `${credentials.user.uid}`), {
+                email: email,
+                projects: []
+            })
             navigate('/')          
         })
 
