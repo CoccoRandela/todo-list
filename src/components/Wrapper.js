@@ -42,7 +42,7 @@ export default function Wrapper() {
             <Routes>
                 <Route path="/" element={<Navigate to='/projects' />} />
                 <Route path="/projects" element={<ProjectsIndex />} />
-                <Route path="/project/:id" element={<ProjectPage />} />
+                <Route path="/projects/:id" element={<ProjectPage />} />
                 <Route path="/calendar" element={<Calendar/>} />
             </Routes>           
         </> 

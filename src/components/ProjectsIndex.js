@@ -44,20 +44,17 @@ export default function ProjectsIndex() {
                 const p = getDoc(doc(db, 'projects', `${id}`))
                 projectsProms.push(p)
             })
-            return projectsProms
+            return Promise.all(projectsProms)
         })
-        .then(projectsProms => {
-            Promise.all(projectsProms)
-            .then((docs) => {
-                const projects = [];
-                docs.forEach(doc => {
-                    projects.push({
-                        ...doc.data(), 
-                        id: doc.id
-                    })
+        .then(snapshots => {
+            const projects = [];
+            snapshots.forEach(s => {
+                projects.push({
+                    ...s.data(), 
+                    id: s.id
                 })
-                setProjects(projects)
             })
+            setProjects(projects)
         })
     }
 
@@ -77,7 +74,7 @@ export default function ProjectsIndex() {
         }
 
         addDoc(collection(db, 'projects'), newProject)
-        .then((docRef) => {
+        .then(docRef => {
             updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
                 projects: arrayUnion(docRef.id)
             })
@@ -95,11 +92,11 @@ export default function ProjectsIndex() {
         })
 
         deleteDoc(doc(db, 'projects', `${projectId}`))
-        .then(
+        .then(() => {
             updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
             projects: arrayRemove(`${projectId}`)
             })
-        )
+        })
 
         setProjects(newProjects)
     }

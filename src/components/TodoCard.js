@@ -5,17 +5,19 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
 
     const [cardInfo, setCardInfo] = useState(todoInfo)
 
-    useEffect(() => {
-        const projects = JSON.parse(localStorage.getItem('projects'));
-        const [ project ] = projects.filter(project => {
-            if (project.id === todoInfo.prjId) return project;
-        })
-        const todos = project.todos.map(todo => {
-            return (todo.id === todoInfo.id )? cardInfo : todo;
-        })
-        project.todos = [...todos];
-        localStorage.setItem('projects', JSON.stringify(projects)) 
-    }, [cardInfo])
+    console.log(cardInfo)
+
+    // useEffect(() => {
+    //     const projects = JSON.parse(localStorage.getItem('projects'));
+    //     const [ project ] = projects.filter(project => {
+    //         if (project.id === todoInfo.prjId) return project;
+    //     })
+    //     const todos = project.todos.map(todo => {
+    //         return (todo.id === todoInfo.id )? cardInfo : todo;
+    //     })
+    //     project.todos = [...todos];
+    //     localStorage.setItem('projects', JSON.stringify(projects)) 
+    // }, [cardInfo])
 
 
     function addColor() {
