@@ -7,7 +7,18 @@ import ProjectCard from "./ProjectCard";
 
 //Firebase imports
 import { auth, db } from "../services/firebase";
-import { collection, doc, getDocs, getDoc, addDoc, serverTimestamp, updateDoc, arrayUnion } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  addDoc,
+  serverTimestamp,
+  updateDoc,
+  arrayUnion,
+  deleteDoc,
+  arrayRemove,
+} from "firebase/firestore";
 
 
 
@@ -28,7 +39,6 @@ export default function ProjectsIndex() {
         getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
         .then((userDoc) => {
             const projectsIds = userDoc.data().projects;
-            console.log(projectsIds)
             const projectsProms = []
             projectsIds.forEach(id => {
                 const p = getDoc(doc(db, 'projects', `${id}`))
@@ -41,7 +51,10 @@ export default function ProjectsIndex() {
             .then((docs) => {
                 const projects = [];
                 docs.forEach(doc => {
-                    projects.push(doc.data())
+                    projects.push({
+                        ...doc.data(), 
+                        id: doc.id
+                    })
                 })
                 setProjects(projects)
             })
@@ -68,10 +81,11 @@ export default function ProjectsIndex() {
             updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
                 projects: arrayUnion(docRef.id)
             })
+            return docRef;
         })
-
-        setProjects([...projects, newProject])
-
+        .then((docRef) => {
+            setProjects([...projects, {...newProject, id: docRef.id}])
+        })
 
     }
 
@@ -79,6 +93,14 @@ export default function ProjectsIndex() {
         const newProjects = projects.filter(project => {
             return project.id !== projectId
         })
+
+        deleteDoc(doc(db, 'projects', `${projectId}`))
+        .then(
+            updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
+            projects: arrayRemove(`${projectId}`)
+            })
+        )
+
         setProjects(newProjects)
     }
 

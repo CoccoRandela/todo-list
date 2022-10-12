@@ -7,6 +7,8 @@ export default function ProjectCard({projectInfo, deleteProject}) {
 
     const [cardInfo, setCardInfo] = useState(projectInfo)
 
+    console.log(cardInfo)
+
     // useEffect(() => {
     //     fetchProject()
     // }, [])    
