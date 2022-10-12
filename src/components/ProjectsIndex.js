@@ -7,7 +7,7 @@ import ProjectCard from "./ProjectCard";
 
 //Firebase imports
 import { auth, db } from "../services/firebase";
-import { collection, doc, getDocs, getDoc, addDoc, serverTimestamp } from 'firebase/firestore'
+import { collection, doc, getDocs, getDoc, addDoc, serverTimestamp, updateDoc, arrayUnion } from 'firebase/firestore'
 
 
 
@@ -23,11 +23,6 @@ export default function ProjectsIndex() {
     }, [])
 
 
-    // useEffect(() => {       
-    //         console.log('storing')
-    //         localStorage.setItem('projects', JSON.stringify(projects))    
-    // }, [projects])
-
 
     function fetchProjects() {
         getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
@@ -36,7 +31,6 @@ export default function ProjectsIndex() {
             console.log(projectsIds)
             const projectsProms = []
             projectsIds.forEach(id => {
-                console.log(id)
                 const p = getDoc(doc(db, 'projects', `${id}`))
                 projectsProms.push(p)
             })
@@ -52,20 +46,6 @@ export default function ProjectsIndex() {
                 setProjects(projects)
             })
         })
-        // getDocs(collection(db, 'projects'))
-        // .then((response) => {
-        //     const projects =[];
-        //     response.docs.map(doc => {
-        //         projects.push({ ...doc.data(), id: doc.id })
-        //     })
-            
-        // })
-        // const response = JSON.parse(localStorage.getItem('projects'));
-        // if (response) {
-            
-        // } else {
-        //     setProjects([]);
-        // }
     }
 
 
@@ -84,8 +64,10 @@ export default function ProjectsIndex() {
         }
 
         addDoc(collection(db, 'projects'), newProject)
-        .then((response) => {
-            console.log(response.data())
+        .then((docRef) => {
+            updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
+                projects: arrayUnion(docRef.id)
+            })
         })
 
         setProjects([...projects, newProject])
@@ -102,7 +84,6 @@ export default function ProjectsIndex() {
 
 
     const projectCards = projects.map(project => {
-        console.log('in creation')
         return (
             <ProjectCard projectInfo={project} deleteProject={deleteProject} key={projects.indexOf(project)}/>
         )

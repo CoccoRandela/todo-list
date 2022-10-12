@@ -24,7 +24,6 @@ export default function ProjectCard({projectInfo, deleteProject}) {
         }
     }, [cardInfo])
 
-    console.log(cardInfo)
 
     function fetchProject() {
         const response = JSON.parse(localStorage.getItem('projects'));
