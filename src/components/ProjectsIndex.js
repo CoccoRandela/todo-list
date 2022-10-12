@@ -6,8 +6,8 @@ import ModalForm from "./ModalForm";
 import ProjectCard from "./ProjectCard";
 
 //Firebase imports
-import { db } from "../services/firebase";
-import { collection, getDocs } from 'firebase/firestore'
+import { auth, db } from "../services/firebase";
+import { collection, doc, getDocs, getDoc, addDoc, serverTimestamp } from 'firebase/firestore'
 
 
 
@@ -23,22 +23,43 @@ export default function ProjectsIndex() {
     }, [])
 
 
-    useEffect(() => {       
-            console.log('storing')
-            localStorage.setItem('projects', JSON.stringify(projects))    
-    }, [projects])
+    // useEffect(() => {       
+    //         console.log('storing')
+    //         localStorage.setItem('projects', JSON.stringify(projects))    
+    // }, [projects])
 
 
     function fetchProjects() {
-        const prjCol = collection(db, 'projects')
-        getDocs(prjCol)
-        .then(response => {
-            const projects =[];
-            response.docs.map(doc => {
-                projects.push({ ...doc.data(), id: doc.id })
+        getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
+        .then((userDoc) => {
+            const projectsIds = userDoc.data().projects;
+            console.log(projectsIds)
+            const projectsProms = []
+            projectsIds.forEach(id => {
+                console.log(id)
+                const p = getDoc(doc(db, 'projects', `${id}`))
+                projectsProms.push(p)
             })
-            setProjects(projects)
+            return projectsProms
         })
+        .then(projectsProms => {
+            Promise.all(projectsProms)
+            .then((docs) => {
+                const projects = [];
+                docs.forEach(doc => {
+                    projects.push(doc.data())
+                })
+                setProjects(projects)
+            })
+        })
+        // getDocs(collection(db, 'projects'))
+        // .then((response) => {
+        //     const projects =[];
+        //     response.docs.map(doc => {
+        //         projects.push({ ...doc.data(), id: doc.id })
+        //     })
+            
+        // })
         // const response = JSON.parse(localStorage.getItem('projects'));
         // if (response) {
             
@@ -54,16 +75,22 @@ export default function ProjectsIndex() {
 
 
     function addProject(inputs) {
-        const [ lastProject ] = projects.slice(-1);
         openCloseModal();
-        const newProjects = [
-            ...projects, { 
-                id: lastProject ? lastProject.id + 1 : 0,
-                ...inputs,
-                todos: []
-            }
-        ]
-        setProjects(newProjects)
+
+        const newProject = {
+            ...inputs,
+            createdAt: serverTimestamp(),
+            todos: []
+        }
+
+        addDoc(collection(db, 'projects'), newProject)
+        .then((response) => {
+            console.log(response.data())
+        })
+
+        setProjects([...projects, newProject])
+
+
     }
 
     function deleteProject(projectId) {
@@ -77,7 +104,7 @@ export default function ProjectsIndex() {
     const projectCards = projects.map(project => {
         console.log('in creation')
         return (
-            <ProjectCard projectInfo={project} deleteProject={deleteProject} key={project.id}/>
+            <ProjectCard projectInfo={project} deleteProject={deleteProject} key={projects.indexOf(project)}/>
         )
     });
     

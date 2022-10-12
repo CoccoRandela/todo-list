@@ -16,6 +16,7 @@ export default function CreateAccount() {
 
     function register(e) {
         e.preventDefault();
+        
         createUserWithEmailAndPassword(auth, email, password)
         .then((credentials) => {
             setDoc(doc(db, 'users', `${credentials.user.uid}`), {
