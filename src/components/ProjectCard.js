@@ -1,5 +1,9 @@
+// React Imports
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+//Firebase Imports
+import { db } from "../services/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function ProjectCard({projectInfo, deleteProject}) {
 
@@ -7,53 +11,17 @@ export default function ProjectCard({projectInfo, deleteProject}) {
 
     const [cardInfo, setCardInfo] = useState(projectInfo)
 
-    console.log(cardInfo)
-
-    // useEffect(() => {
-    //     fetchProject()
-    // }, [])    
     
     useEffect(() => {
-        // condition necessary to avoid use in first render and infinite loop
-        if (Object.keys(cardInfo).length) {
-            const projects = JSON.parse(localStorage.getItem('projects'));
+        setDoc(doc(db, 'projects', `${cardInfo.id}`), cardInfo)
 
-            const newProjects = projects.map(project => {
-                return (project.id === projectInfo.id )? cardInfo : project;
-            })  
-
-            localStorage.setItem('projects', JSON.stringify(newProjects)) 
-        }
     }, [cardInfo])
 
-
-    function fetchProject() {
-        const response = JSON.parse(localStorage.getItem('projects'));
-        console.log(response, 'fetching project')
-        const [ project ] = response.filter(project => {
-            if (project.id === id) return project
-        })
-        if (project) {
-            setCardInfo(project)
-        } else {
-            setCardInfo([]);
-        }
-    }
 
     function openProject() {
         navigate(`${cardInfo.id}`, {state: cardInfo})
     }
 
-    // function handleEdit() {
-    //     let projects = JSON.parse(localStorage.getItem('projects'));
-    //     console.log(projects)
-    //     projects = projects.map(project => {
-    //         return (project.id === id )? cardInfo : project;
-    //     })  
-    //     console.log(projects) 
-    //     localStorage.setItem('projects', JSON.stringify(projects))    
-    //     fetchProject()
-    // }
 
 
     return (
