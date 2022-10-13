@@ -1,9 +1,9 @@
 import { db } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { fetchUser } from "./user.service";
+import { fetchUserDoc } from "./user.service";
 
 function fetchAllProjects() {
-    return fetchUser()
+    return fetchUserDoc()
     .then((userDoc) => {
         const projectsIds = userDoc.data().projects;
         const projectsProms = projectsIds.map(id => getDoc(doc(db, 'projects', `${id}`)))

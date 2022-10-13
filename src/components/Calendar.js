@@ -7,8 +7,9 @@ import TodoCard from "./TodoCard";
 import dayjs from 'dayjs';
 //Firebase Imports
 import { db, auth } from "../services/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { fetchAllProjects } from "../services/project.service";
+import { fetchUserDoc } from "../services/user.service";
 
 
 export default function CalendarPage() {
@@ -23,19 +24,16 @@ export default function CalendarPage() {
     }, [])
 
     function fetchUserTodos() {
-        return fetchAllProjects()
-        .then(projects => {
-            let userTodosIds = [];
-            projects.forEach(p => {
-                userTodosIds = [...userTodosIds, ...p.todos]
-            })
-            const todoProms = userTodosIds.map(id => getDoc(doc(db, 'todos', `${id}`)))
-            return Promise.all(todoProms)
+        return fetchUserDoc()
+        .then(userDoc => {
+            return userDoc.data().projects;
+        }).then(ids => {
+            console.log(ids)
+            return getDocs(query(collection(db, 'todos'), where('projectId', 'in', ids)))
         })
         .then(snapshots => {
-            const todos = snapshots.map(s =>({...s.data(), id: s.id}))
-
-            return todos
+            const todos = snapshots.docs.map(s =>({...s.data(), id: s.id}))
+            return todos;
         })
     }
 
