@@ -1,5 +1,10 @@
+//React Imports
 import React, { useState, useEffect } from "react";
+//Components
 import CheckboxContainer from "./CheckboxContainer";
+//Firebase Imports
+import { db } from "../services/firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 export default function TodoCard({ todoInfo, deleteTodo }) {
 
@@ -7,17 +12,10 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
 
     console.log(cardInfo)
 
-    // useEffect(() => {
-    //     const projects = JSON.parse(localStorage.getItem('projects'));
-    //     const [ project ] = projects.filter(project => {
-    //         if (project.id === todoInfo.prjId) return project;
-    //     })
-    //     const todos = project.todos.map(todo => {
-    //         return (todo.id === todoInfo.id )? cardInfo : todo;
-    //     })
-    //     project.todos = [...todos];
-    //     localStorage.setItem('projects', JSON.stringify(projects)) 
-    // }, [cardInfo])
+    useEffect(() => {
+        setDoc(doc(db, 'todos', `${cardInfo.id}`), cardInfo)
+
+    }, [cardInfo])
 
 
     function addColor() {
