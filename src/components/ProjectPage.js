@@ -59,7 +59,8 @@ export default function Project() {
     function addTodo(inputs) {
         openCloseModal()
 
-        const newTodo = { 
+        const newTodo = {
+            projectId: state.id,
             createdAt: serverTimestamp(),
             ...inputs,
             checkboxes: []
@@ -94,7 +95,7 @@ export default function Project() {
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard todoInfo={todo} projectId={state.id} className="todo" deleteTodo={deleteTodo} key={todo.id}/>
+            <TodoCard todoInfo={todo}  className="todo" deleteTodo={deleteTodo} key={todo.id}/>
         )
     })
 
