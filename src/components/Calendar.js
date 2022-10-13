@@ -1,26 +1,49 @@
-import React, { useState } from "react";
+//React Imports
+import React, { useEffect, useState } from "react";
+//Components
 import Calendar from 'react-calendar';
-import dayjs from 'dayjs';
 import TodoCard from "./TodoCard";
+//dayjs
+import dayjs from 'dayjs';
+//Firebase Imports
+import { db, auth } from "../services/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { fetchAllProjects } from "../services/project.service";
 
 
 export default function CalendarPage() {
 
     const [modal, setModal] = useState(false);
+    const [userTodos, setUserTodos] = useState([]);
     const [modalContent, setModalContent] = useState(null)
 
-    function assignClass({ date, view }) {
-        const projects = JSON.parse(localStorage.getItem('projects'))
-        let contentToDisplay = [];
-        projects.forEach(project => {
-            const todos = project.todos;
-            todos.forEach(todo => contentToDisplay.push(todo))
-            
+    useEffect(() => {
+        fetchUserTodos()
+        .then(todos => setUserTodos(todos))
+    }, [])
+
+    function fetchUserTodos() {
+        return fetchAllProjects()
+        .then(projects => {
+            let userTodosIds = [];
+            projects.forEach(p => {
+                userTodosIds = [...userTodosIds, ...p.todos]
+            })
+            const todoProms = userTodosIds.map(id => getDoc(doc(db, 'todos', `${id}`)))
+            return Promise.all(todoProms)
         })
+        .then(snapshots => {
+            const todos = snapshots.map(s =>({...s.data(), id: s.id}))
+
+            return todos
+        })
+    }
+
+    function assignClass({ date, view }) {
         // contentToDisplay.forEach(content => {
         //     console.log(dayjs(content.dueDate, 'YYYY-MM-DD').$d)
         // })
-        if (contentToDisplay.find(el => {
+        if (userTodos.find(el => {
             return dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(date).format()
         })) {
             return 'filled'

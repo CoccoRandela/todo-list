@@ -19,6 +19,8 @@ import {
   deleteDoc,
   arrayRemove,
 } from "firebase/firestore";
+//Services
+import { fetchAllProjects } from "../services/project.service";
 
 
 
@@ -30,34 +32,10 @@ export default function ProjectsIndex() {
 
 
     useEffect(() => {
-        fetchProjects()
+        fetchAllProjects()
         .then(projects => setProjects(projects))
     }, [])
 
-
-
-    function fetchProjects() {
-        return getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
-        .then((userDoc) => {
-            const projectsIds = userDoc.data().projects;
-            const projectsProms = []
-            projectsIds.forEach(id => {
-                const p = getDoc(doc(db, 'projects', `${id}`))
-                projectsProms.push(p)
-            })
-            return Promise.all(projectsProms)
-        })
-        .then(snapshots => {
-            const projects = [];
-            snapshots.forEach(s => {
-                projects.push({
-                    ...s.data(), 
-                    id: s.id
-                })
-            })
-            return projects
-        })
-    }
 
 
     function openCloseModal() {

@@ -27,28 +27,21 @@ export default function Project() {
 
     useEffect(() => {
         fetchTodos()
+        .then(todos => setTodos(todos))
     }, [])
     
 
     function fetchTodos() {
-        getDoc(doc(db, 'projects', `${state.id}`))
+        return getDoc(doc(db, 'projects', `${state.id}`))
         .then(projectSnap => {
             const todosIds = projectSnap.data().todos;
-            const todoProms = [];
-            todosIds.forEach(id => {
-                const p = getDoc(doc(db, 'todos', `${id}`));
-                todoProms.push(p)
-            }) 
+            const todoProms = todosIds.map(id => getDoc(doc(db, 'todos', `${id}`))) 
             return (Promise.all(todoProms))
         })
         .then(snapshots => {
-            const todos = [];
-            snapshots.forEach(s => {
-                todos.push({
-                    ...s.data(), id: s.id
-                })
-            })
-            setTodos(todos)
+            const todos = snapshots.map(s =>({...s.data(), id: s.id}));
+
+            return todos;
         })
     }
     
