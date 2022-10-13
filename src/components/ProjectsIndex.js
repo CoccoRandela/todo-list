@@ -30,13 +30,14 @@ export default function ProjectsIndex() {
 
 
     useEffect(() => {
-        fetchProjects();
+        fetchProjects()
+        .then(projects => setProjects(projects))
     }, [])
 
 
 
     function fetchProjects() {
-        getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
+        return getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
         .then((userDoc) => {
             const projectsIds = userDoc.data().projects;
             const projectsProms = []
@@ -54,7 +55,7 @@ export default function ProjectsIndex() {
                     id: s.id
                 })
             })
-            setProjects(projects)
+            return projects
         })
     }
 
@@ -87,6 +88,8 @@ export default function ProjectsIndex() {
     }
 
     function deleteProject(projectId) {
+        console.log('here', projectId)
+
         const newProjects = projects.filter(project => {
             return project.id !== projectId
         })
@@ -104,7 +107,7 @@ export default function ProjectsIndex() {
 
     const projectCards = projects.map(project => {
         return (
-            <ProjectCard projectInfo={project} deleteProject={deleteProject} key={projects.indexOf(project)}/>
+            <ProjectCard projectInfo={project} deleteProject={deleteProject} key={project.id}/>
         )
     });
     
