@@ -1,27 +1,24 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+//React Imports
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../services/firebase";
+//Services
+import { login } from "../services/user.service";
 
 export default function Login() {
     const [email, setEmail] = useState([]);
     const [password, setPassword] = useState([]);
     const navigate = useNavigate()
 
-    function login(e) {
+    function redirectToHomepage(e) {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            navigate('/')          
-        })
-        .catch((error) => {
-            alert(error.message)
-        })
+        login(email, password)
+        .then(() => navigate('/'))
+        .catch((error) => alert(error.message))
     }
 
     return (
         <div className="modal">
-            <form onSubmit={login}>
+            <form onSubmit={redirectToHomepage}>
                 <label>
                     email
                     <input type='email' defaultValue='' onChange={(e) => {
