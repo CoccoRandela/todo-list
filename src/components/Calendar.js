@@ -7,8 +7,7 @@ import TodoCard from "./TodoCard";
 import dayjs from 'dayjs';
 //Firebase Imports
 import { db, auth } from "../services/firebase";
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
-import { fetchAllProjects } from "../services/project.service";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { fetchUserDoc } from "../services/user.service";
 
 
@@ -16,6 +15,7 @@ export default function CalendarPage() {
 
     const [modal, setModal] = useState(false);
     const [userTodos, setUserTodos] = useState([]);
+    const [todosToDisplay, setTodostoDisplay] = useState([])
     const [modalContent, setModalContent] = useState(null)
 
     useEffect(() => {
@@ -28,7 +28,6 @@ export default function CalendarPage() {
         .then(userDoc => {
             return userDoc.data().projects;
         }).then(ids => {
-            console.log(ids)
             return getDocs(query(collection(db, 'todos'), where('projectId', 'in', ids)))
         })
         .then(snapshots => {
@@ -38,40 +37,13 @@ export default function CalendarPage() {
     }
 
     function assignClass({ date, view }) {
-        // contentToDisplay.forEach(content => {
-        //     console.log(dayjs(content.dueDate, 'YYYY-MM-DD').$d)
-        // })
-        if (userTodos.find(el => {
-            return dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(date).format()
-        })) {
+        if (userTodos.find(el => dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(date).format())) {
             return 'filled'
         }
     }
 
-    function displayTodos(value) {
-        const projects = JSON.parse(localStorage.getItem('projects'))
-        console.log(projects)
-        let contentToDisplay = [];
-        projects.forEach(project => {
-            const todos = [...project.todos];
-            todos.forEach(todo => contentToDisplay.push(todo))
-        }) 
-        console.log(contentToDisplay, 'content')
-        contentToDisplay.forEach(el => {
-            if(dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(value).format()) {
-                setModal(true)
-            }
-        })
-        const cards = contentToDisplay.map(el => {
-            if(dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(value).format()) {
-                return <TodoCard todoInfo={el} key={contentToDisplay.indexOf(el)}deleteTodo={() => deleteTodo(el, value)}/>
-            }
-        })
-
-        setModalContent(cards)
-
-        return cards;
-        
+    function getTodosofDate(date) {
+        return userTodos.filter(el => dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(date).format())   
     }    
 
     function deleteTodo(el, value) {
@@ -87,17 +59,24 @@ export default function CalendarPage() {
         setModal(false);
     }
 
+    const cards = todosToDisplay.map(todo => {
+        return <TodoCard todoInfo={todo}/>
+    })
+
 
     return (
         <>
         {modal && <div className="modal">
                 <div className="day-content">
                     <button onClick={() => setModal(false)}>Back</button>
-                    {modalContent}
+                    {cards}
                 </div>
             </div>}
         <Calendar tileClassName={assignClass}
-        onClickDay={displayTodos}/>
+        onClickDay={value => {
+            setModal(true)
+            setTodostoDisplay(getTodosofDate(value))
+        }}/>
         </>
     )
 }
