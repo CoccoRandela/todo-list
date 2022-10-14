@@ -18,6 +18,8 @@ import {
   arrayRemove,
 } from "firebase/firestore";
 
+import { deleteTodofromDatabase } from "../services/todo.service";
+
 export default function Project() {
 
     const {state} = useLocation()
@@ -71,17 +73,12 @@ export default function Project() {
         })
     }
 
-    function deleteTodo(todoId) {
-        const newTodos = todos.filter(todo => {
-            return todo.id !== todoId
+    function deleteTodo(todo) {
+        const newTodos = todos.filter(item => {
+            return item.id !== todo.id
         })
 
-        deleteDoc(doc(db, 'todos', `${todoId}`))
-        .then(() => {
-            updateDoc(doc(db, 'projects', `${state.id}`), {
-                todos: arrayRemove(`${todoId}`)
-            })
-        })
+        deleteTodofromDatabase(todo);
 
         setTodos(newTodos);
     }

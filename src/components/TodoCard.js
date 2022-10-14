@@ -126,7 +126,7 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
                 })
             }}/>    
 
-            <button onClick={() => deleteTodo(cardInfo.id)}>Delete</button>   
+            <button onClick={() => deleteTodo(cardInfo)}>Delete</button>   
 
         </div>
     )

@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import { db, auth } from "../services/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { fetchUserDoc } from "../services/user.service";
+import { deleteTodofromDatabase } from "../services/todo.service";
 
 
 export default function CalendarPage() {
@@ -21,7 +22,7 @@ export default function CalendarPage() {
     useEffect(() => {
         fetchUserTodos()
         .then(todos => setUserTodos(todos))
-    }, [])
+    }, [todosToDisplay])
 
     function fetchUserTodos() {
         return fetchUserDoc()
@@ -43,24 +44,20 @@ export default function CalendarPage() {
     }
 
     function getTodosofDate(date) {
-        return userTodos.filter(el => dayjs(el.dueDate, 'YYYY-MM-DD').format() === dayjs(date).format())   
+        return userTodos.filter(todo => dayjs(todo.dueDate, 'YYYY-MM-DD').format() === dayjs(date).format())   
     }    
 
-    function deleteTodo(el, value) {
-        const projects = JSON.parse(localStorage.getItem('projects')); 
-        const [ project ] = projects.filter(
-            project => project.id === el.prjId
-            )
-        console.log(project, 'project')
-        project.todos = project.todos.filter(todo => todo.id !== el.id)
-        console.log(projects)
-        localStorage.setItem('projects', JSON.stringify(projects))
-        displayTodos(value);
-        setModal(false);
+    function deleteTodo(todo) {
+        const newTodosToDisplay = todosToDisplay.filter(item => item.id !== todo.id);
+        deleteTodofromDatabase(todo)
+        setTodostoDisplay(newTodosToDisplay);
+        if(newTodosToDisplay.length === 0) {
+            setModal(false);
+        }
     }
 
     const cards = todosToDisplay.map(todo => {
-        return <TodoCard todoInfo={todo}/>
+        return <TodoCard todoInfo={todo} deleteTodo={deleteTodo} key={todo.id}/>
     })
 
 
