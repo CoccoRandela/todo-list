@@ -1,26 +1,23 @@
 // React imports
 import React, {useEffect, useState} from "react";
-import ModalForm from "./Form";
+import Form from "./Form";
 
 //Components
 import ProjectCard from "./ProjectCard";
+import { AddButtonStyles, ProjectsIndexStyles } from "./styles";
 
 //Firebase imports
 import { auth, db } from "../services/firebase";
 import {
-  collection,
   doc,
-  getDocs,
-  getDoc,
-  addDoc,
   serverTimestamp,
   updateDoc,
-  arrayUnion,
   deleteDoc,
   arrayRemove,
 } from "firebase/firestore";
 //Services
-import { fetchAllProjects } from "../services/project.service";
+import { fetchAllProjects, add, remove } from "../services/project.service";
+import { ModalContainerStyles, ModalStyles } from "./styles";
 
 
 
@@ -52,13 +49,7 @@ export default function ProjectsIndex() {
             todos: []
         }
 
-        addDoc(collection(db, 'projects'), newProject)
-        .then(docRef => {
-            updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
-                projects: arrayUnion(docRef.id)
-            })
-            return docRef;
-        })
+        add(newProject)
         .then((docRef) => {
             setProjects([...projects, {...newProject, id: docRef.id}])
         })
@@ -72,12 +63,7 @@ export default function ProjectsIndex() {
             return project.id !== projectId
         })
 
-        deleteDoc(doc(db, 'projects', `${projectId}`))
-        .then(() => {
-            updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
-            projects: arrayRemove(`${projectId}`)
-            })
-        })
+        remove(projectId);
 
         setProjects(newProjects)
     }
@@ -91,19 +77,28 @@ export default function ProjectsIndex() {
     
 
     return (
-        <div className="index">
-
-            {modal && <ModalForm item="project" className="modal prj-mod" options={['title', 'description']} addItem={addProject} closeModal={openCloseModal}/>}
+        <ProjectsIndexStyles>
+            {modal && 
+            <ModalContainerStyles>
+                <ModalStyles>
+                    <Form 
+                    fields={['title', 'description']} submitFunc={addProject} 
+                    cancelButton={true}
+                    buttonText={'Add Project'} closeModal={openCloseModal}/>
+                </ModalStyles>
+            </ModalContainerStyles>    
+            }
 
             <header className="prj-head">    
                 <h1>Your Projects</h1>
-                <button className="add-prj-btn" onClick={openCloseModal}>+</button>
+                <AddButtonStyles onClick={openCloseModal}>
+                +</AddButtonStyles> 
             </header>
 
             <div className="projects">
                 {projectCards}
             </div>    
 
-        </div>
+        </ProjectsIndexStyles>
     )
 }

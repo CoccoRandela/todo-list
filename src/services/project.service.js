@@ -1,5 +1,5 @@
-import { db } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { db, auth } from "./firebase";
+import { doc, getDoc, updateDoc, addDoc } from "firebase/firestore";
 import { fetchUserDoc } from "./user.service";
 
 function fetchAllProjects() {
@@ -15,4 +15,23 @@ function fetchAllProjects() {
     })
 }
 
-export { fetchAllProjects };
+function add(project) {
+    return addDoc(collection(db, 'projects'), project)
+    .then(docRef => {
+        updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
+            projects: arrayUnion(docRef.id)
+        })
+        return docRef;
+    })
+}
+
+function remove(id) {
+    deleteDoc(doc(db, 'projects', `${id}`))
+    .then(() => {
+        updateDoc(doc(db, 'users',`${auth.currentUser.uid}`), {
+        projects: arrayRemove(`${id}`)
+        })
+    })
+}
+
+export { fetchAllProjects, add, remove };

@@ -6,7 +6,6 @@ import { Calendar, Navbar, ProjectPage, ProjectsIndex } from "./index";
 import { ButtonStyles, HeaderStyles } from "./styles";
 //Services
 import { fetchUser, logout } from "../services/user.service";
-import { auth } from "../services/firebase";
 
 
 export default function Wrapper() {
