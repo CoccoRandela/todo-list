@@ -21,7 +21,7 @@ export default function Wrapper() {
         if(currentUser) {
             setUser(currentUser)            
         } else {
-            navigate('/login')            
+            navigate( '/login')            
         }
     }
     
@@ -29,7 +29,7 @@ export default function Wrapper() {
         logout()
         .then((response) => {
             fetchUser(setcurrentUser)
-        })
+        })       
     }
 
     return (
