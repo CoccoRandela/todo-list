@@ -2,17 +2,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //Components
-import { Modal, Form } from "./styles";
+import { Modal } from "./styles";
 //Services
 import { login } from "../services/user.service";
+import ModalForm from "./ModalForm";
 
 export default function Login() {
-    const [email, setEmail] = useState([]);
-    const [password, setPassword] = useState([]);
+    // const [email, setEmail] = useState([]);
+    // const [password, setPassword] = useState([]);
     const navigate = useNavigate()
 
-    function redirectToHomepage(e) {
-        e.preventDefault();
+    function redirectToHomepage({ email, password }) {
         login(email, password)
         .then(() => navigate('/'))
         .catch((error) => alert(error.message))
@@ -20,16 +20,15 @@ export default function Login() {
 
     return (
         <Modal>
-            <Form onSubmit={redirectToHomepage}>
-                <input type='email' defaultValue='' placeholder="e-mail" onChange={(e) => {
-                    setEmail(e.target.value)
-                }}/> 
-                <input type='password' defaultValue='' placeholder='password' onChange={(e) => {
-                    setPassword(e.target.value)
-                }}/>
-                <button type="submit">Login</button>         
-            </Form>
-            <span>New User?<Link to='/create-account'>Create Account</Link> </span>
+            <h3>BetterLate</h3>
+            <ModalForm 
+            fields={['email', 'password']} 
+            submitFunc={redirectToHomepage}
+            cancelButton={false}
+            buttonText={'Sign In'}
+            />
+            <span>New User?<Link to='/create-account'>Create Account</Link> 
+            </span>
         </Modal>
     )
 }

@@ -91,7 +91,7 @@ export default function Project() {
 
     return (
         <div className="index">
-            {modal && <ModalForm item="todo" className="modal prj-mod" options={['title', 'dueDate', 'priority']} addItem={addTodo} closeModal={openCloseModal}/>}
+            {modal && <ModalForm item="todo" options={['title', 'dueDate', 'priority']} addItem={addTodo} closeModal={openCloseModal}/>}
 
             <header className="prj-head">    
                 <h1>{state.title}</h1>

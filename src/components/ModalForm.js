@@ -1,68 +1,48 @@
 import React, { useState } from "react";
+import { TextInput, SelectInput, DateInput } from "./FormInputs";
+import { Form } from "./styles";
 
-export default function ModalForm({ item, className, options, addItem, closeModal }) {  
-    
-    const inputsInitialState = {};
-    options.map(option => {
-        if (option === 'priority' ) {
-            inputsInitialState[option] = 'low'
-        } else inputsInitialState[option] = '';
-    })
+export default function ModalForm({ fields, submitFunc, cancelButton, buttonText, closeModal }) {  
 
-    const [inputs, setInputs] = useState(inputsInitialState);
+    const [inputs, setInputs] = useState({});
 
     function handleSubmit(e) {
         e.preventDefault();
-        addItem(inputs);
+        submitFunc(inputs);
     }
 
-    function handleChange(e, option) {
+    function handleChange(e, field) {
         setInputs({
-            ...inputs, [option]: e.target.value
+            ...inputs, [field]: e.target.value
         })
     }
 
-    const formInputs = options.map(option => {
-        if (option === 'priority') {
-            return (
-                <div key={option}>
-                    <label>
-                        {option}
-                        <select required defaultValue="low" onChange={(e)=> handleChange(e,option)}>
-                            <option value="low">low</option>
-                            <option value="medium">medium</option>
-                            <option value="high">high</option>
-                        </select>
-                    </label>
-                </div>               
-            )
-        } else {
-            return (
-                <div key={option}>
-                    <label>
-                        {option === 'dueDate'? 'due date': option}
-                        <input 
-                        type={option === 'dueDate'? "date":"text"} 
-                        defaultValue={inputs[option]} onChange={(e)=> handleChange(e,option)} 
-                        min={option === 'dueDate'? new Date().toLocaleDateString('en-ca'): ''}
-                        required
-                        />
-                    </label>
-                </div>
-            )
+    const formFields = fields.map(field => {
+        console.log(field)
+        switch(field) {
+            case 'priority':
+                return <SelectInput field={field} options={['low', 'medium', 'high']}handleChange={handleChange}
+                />
+                break;
+            case 'dueDate':
+                return <DateInput field={field} handleChange={handleChange} />
+                break;
+            default: 
+                return <TextInput field={field} handleChange={handleChange} />
+              
         }
     })
 
     
     return (
-        <div className={className}>
-            <form onSubmit={handleSubmit}>
-                {formInputs}
-                <div>
-                    <button onClick={closeModal}>Cancel</button>
-                    <button type="submit">{`Create ${item}`}</button>    
-                </div>
-            </form>
-        </div>
+        <Form onSubmit={handleSubmit}>
+            {formFields}
+            <div>
+                { cancelButton && 
+                <button onClick={closeModal}>Cancel</button>
+                }
+                <button type="submit">{buttonText}</button>    
+            </div>
+        </Form>
     )
 }
