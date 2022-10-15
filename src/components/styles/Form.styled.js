@@ -5,4 +5,11 @@ export const FormStyles = styled.form`
     flex-direction: column;
     gap: 1em;
 
+    input {
+        padding: .5em 1em;
+        border-radius: 1em;
+        border: none;
+        color: ${({theme}) => theme.colors.dark}
+    }
+
 `
