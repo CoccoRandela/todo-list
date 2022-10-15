@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 //Firebase Imports
 import { db } from "../services/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { CardStyles } from "./styles";
+import { CardStyles, CardButtonStyles } from "./styles";
 
 export default function ProjectCard({projectInfo, deleteProject}) {
 
@@ -39,8 +39,8 @@ export default function ProjectCard({projectInfo, deleteProject}) {
                     description: e.target.value
                 })
             }} />
-            <button onClick={openProject}>Open</button>
-            <button onClick={() => deleteProject(cardInfo.id)}>Delete</button>     
+            <CardButtonStyles onClick={openProject}>Open</CardButtonStyles>
+            <CardButtonStyles onClick={() => deleteProject(cardInfo.id)}>Delete</CardButtonStyles>     
         </CardStyles>
     )
 }

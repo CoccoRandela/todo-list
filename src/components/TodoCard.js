@@ -5,6 +5,7 @@ import CheckboxContainer from "./CheckboxContainer";
 //Firebase Imports
 import { db } from "../services/firebase";
 import { setDoc, doc } from "firebase/firestore";
+import { CardStyles } from "./styles";
 
 export default function TodoCard({ todoInfo, deleteTodo }) {
 
@@ -102,7 +103,7 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
     }
 
     return (
-        <div style={{backgroundColor: addColor()}} className="todo">
+        <CardStyles>
 
             <div>
                 <button onClick={() => {
@@ -128,6 +129,6 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
 
             <button onClick={() => deleteTodo(cardInfo)}>Delete</button>   
 
-        </div>
+        </CardStyles>
     )
 }

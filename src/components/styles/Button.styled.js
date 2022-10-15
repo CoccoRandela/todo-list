@@ -28,3 +28,12 @@ export const AddButtonStyles = styled(ButtonStyles)`
         color: ${({theme}) => theme.colors.dark};
     }
 `
+
+export const CardButtonStyles = styled(ButtonStyles)` 
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: ${({theme}) => theme.colors.mid};
+        color: ${({theme}) => theme.colors.light};
+    }
+`
