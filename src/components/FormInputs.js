@@ -38,10 +38,11 @@ function SelectInput({field, options, handleChange}) {
 
     return (
         <select
-        defaultValue="low"
-        placeholder={field}
         onChange={(e) => handleChange(e, field)}
-        >
+        >   
+            <option disabled selected>
+                priority
+            </option>
             {optionSlots}
         </select>
     )

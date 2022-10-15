@@ -6,6 +6,8 @@ export default function Form({ fields, submitFunc, cancelButton, buttonText, clo
 
     const [inputs, setInputs] = useState({});
 
+    console.log(inputs)
+
     function handleSubmit(e) {
         e.preventDefault();
         submitFunc(inputs);

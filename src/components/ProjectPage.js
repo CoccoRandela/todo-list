@@ -87,7 +87,7 @@ export default function Project() {
 
     const todoCards = todos.map(todo => {
         return (
-            <TodoCard todoInfo={todo}  className="todo" deleteTodo={deleteTodo} key={todo.id}/>
+            <TodoCard todoInfo={todo} deleteTodo={deleteTodo} key={todo.id}/>
         )
     })
 
