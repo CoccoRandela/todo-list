@@ -1,6 +1,6 @@
 // React imports
 import React, {useEffect, useState} from "react";
-import ModalForm from "./ModalForm";
+import ModalForm from "./Form";
 
 //Components
 import ProjectCard from "./ProjectCard";

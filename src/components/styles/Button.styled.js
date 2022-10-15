@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormStyles = styled.form`
+export const ButtonStyles = styled.button`
     display: flex;
     flex-direction: column;
 

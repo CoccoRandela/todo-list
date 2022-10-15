@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { TextInput, SelectInput, DateInput } from "./FormInputs";
-import { Form } from "./styles";
+import { FormStyles } from "./styles";
 
-export default function ModalForm({ fields, submitFunc, cancelButton, buttonText, closeModal }) {  
+export default function Form({ fields, submitFunc, cancelButton, buttonText, closeModal }) {  
 
     const [inputs, setInputs] = useState({});
 
@@ -35,7 +35,7 @@ export default function ModalForm({ fields, submitFunc, cancelButton, buttonText
 
     
     return (
-        <Form onSubmit={handleSubmit}>
+        <FormStyles onSubmit={handleSubmit}>
             {formFields}
             <div>
                 { cancelButton && 
@@ -43,6 +43,6 @@ export default function ModalForm({ fields, submitFunc, cancelButton, buttonText
                 }
                 <button type="submit">{buttonText}</button>    
             </div>
-        </Form>
+        </FormStyles>
     )
 }

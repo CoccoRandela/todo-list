@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 //Components
-import ModalForm from "./ModalForm";
+import ModalForm from "./Form";
 import TodoCard from "./TodoCard";
 //Firebase Imports
 import { db } from "../services/firebase";

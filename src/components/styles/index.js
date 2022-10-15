@@ -1,5 +1,7 @@
-import { Form } from "./Form.styled";
+import { FormStyles } from "./Form.styled";
 import { GlobalStyles } from "./Global.styled";
-import { Modal } from "./Modal.styled";
+import { ModalStyles } from "./Modal.styled";
+import { HeaderStyles } from "./Header.styled"
+import { ModalContainerStyles } from "./ModalContainer.styled";
 
-export { Modal, Form, GlobalStyles };
+export { ModalContainerStyles, ModalStyles, FormStyles, HeaderStyles, GlobalStyles };
