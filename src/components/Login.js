@@ -1,6 +1,8 @@
 //React Imports
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+//Components
+import { Modal, Form } from "./styles";
 //Services
 import { login } from "../services/user.service";
 
@@ -17,23 +19,17 @@ export default function Login() {
     }
 
     return (
-        <div className="modal">
-            <form onSubmit={redirectToHomepage}>
-                <label>
-                    email
-                    <input type='email' defaultValue='' onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}/> 
-                </label>
-                <label>
-                    password
-                    <input type='password' defaultValue='' onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}/>
-                </label> 
+        <Modal>
+            <Form onSubmit={redirectToHomepage}>
+                <input type='email' defaultValue='' placeholder="e-mail" onChange={(e) => {
+                    setEmail(e.target.value)
+                }}/> 
+                <input type='password' defaultValue='' placeholder='password' onChange={(e) => {
+                    setPassword(e.target.value)
+                }}/>
                 <button type="submit">Login</button>         
-            </form>
+            </Form>
             <span>New User?<Link to='/create-account'>Create Account</Link> </span>
-        </div>
+        </Modal>
     )
 }
