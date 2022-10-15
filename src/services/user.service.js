@@ -6,8 +6,20 @@ function fetchUserDoc() {
     return getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
 }
 
-function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password)
+function createUserDoc(credentials) {
+    return setDoc(doc(db, 'users', `${credentials.user.uid}`), {
+        email: credentials.user.email,
+        projects: []
+    })
+
 }
 
-export { fetchUserDoc, login };
+function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
+}
+
+function createUser(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export { fetchUserDoc, login, createUser, createUserDoc };

@@ -18,7 +18,6 @@ export default function Form({ fields, submitFunc, cancelButton, buttonText, clo
     }
 
     const formFields = fields.map(field => {
-        console.log(field)
         switch(field) {
             case 'priority':
                 return <SelectInput field={field} options={['low', 'medium', 'high']}handleChange={handleChange}

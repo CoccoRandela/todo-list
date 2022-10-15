@@ -1,10 +1,12 @@
 // React Imports
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-//Firebase Imports
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth, db } from "../services/firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+//Components
+import { ModalStyles, ModalContainerStyles, HeaderStyles } from "./styles";
+import Form from "./Form";
+//Services
+import { createUser, createUserDoc } from "../services/user.service";
+
 
 
 
@@ -14,37 +16,33 @@ export default function CreateAccount() {
 
     const navigate = useNavigate();
 
-    function register(e) {
-        e.preventDefault();
-        
-        createUserWithEmailAndPassword(auth, email, password)
+    function redirectToHomepage({email, password}) {
+        createUser(email, password)
         .then((credentials) => {
-            setDoc(doc(db, 'users', `${credentials.user.uid}`), {
-                email: email,
-                projects: []
-            })
-            navigate('/')          
+            createUserDoc(credentials);       
+        })
+        .then(() => {
+            navigate('/'); 
         })
 
     }
 
     return (
-        <div className="modal">
-            <form onSubmit={register}>
-                <label>
-                    email
-                    <input type='email' defaultValue='' onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}/> 
-                </label>
-                <label>
-                    password
-                    <input type='password' defaultValue='' onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}/>
-                </label>
-                <button type="submit">Create Account</button>          
-            </form>
-        </div>
+        <>
+        <HeaderStyles>
+            <h2>BetterLate</h2>
+        </HeaderStyles>
+        <ModalContainerStyles>
+            <ModalStyles>
+                <h3>Join now!</h3>
+                <Form 
+                fields={['email', 'password']} 
+                submitFunc={redirectToHomepage}
+                cancelButton={false}
+                buttonText={'Sign Up'}
+                />
+            </ModalStyles>
+        </ModalContainerStyles>
+        </>
     )
 }

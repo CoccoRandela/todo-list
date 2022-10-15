@@ -1,10 +1,9 @@
 import React from "react";
 
+
 function TextInput({ field, handleChange }) {
 
-    console.log(field)
-
-    const type = (field) => {
+    const type = () => {
         switch(field) {
             case 'email':
                 return 'email';

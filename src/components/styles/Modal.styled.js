@@ -9,7 +9,7 @@ export const ModalStyles = styled.div`
     color: ${({theme}) => theme.colors.light};
 
     h3, p {
-        margin: 1em 0;
+        margin: 0;
     }
 
     p {
