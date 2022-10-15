@@ -1,4 +1,5 @@
 import React from "react";
+import { TextInputStyles } from "./styles";
 
 function TextInput({ field, handleChange }) {
 
@@ -18,8 +19,6 @@ function TextInput({ field, handleChange }) {
 
         }
     }
-
-    console.log(type())
 
     return(
         <input 

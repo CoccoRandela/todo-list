@@ -4,6 +4,7 @@ export const GlobalStyles = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
     }
 
     html, body, #root {
@@ -12,7 +13,6 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
         margin: 0;
-        font-family: 'Montserrat', sans-serif;
         background-color: ${({theme}) => theme.colors.light}
     }
 `

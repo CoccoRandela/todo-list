@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextInput, SelectInput, DateInput } from "./FormInputs";
-import { FormStyles } from "./styles";
+import { ButtonStyles, FormStyles } from "./styles";
 
 export default function Form({ fields, submitFunc, cancelButton, buttonText, closeModal }) {  
 
@@ -39,9 +39,9 @@ export default function Form({ fields, submitFunc, cancelButton, buttonText, clo
             {formFields}
             <div>
                 { cancelButton && 
-                <button onClick={closeModal}>Cancel</button>
+                <ButtonStyles onClick={closeModal}>Cancel</ButtonStyles>
                 }
-                <button type="submit">{buttonText}</button>    
+                <ButtonStyles type="submit">{buttonText}</ButtonStyles>    
             </div>
         </FormStyles>
     )

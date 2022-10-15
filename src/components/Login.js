@@ -1,9 +1,14 @@
 //React Imports
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //Components
 import Form from "./Form";
-import { ModalStyles, ModalContainerStyles, HeaderStyles } from "./styles";
+import {
+  ModalStyles,
+  ModalContainerStyles,
+  HeaderStyles,
+  ButtonStyles,
+} from "./styles";
 //Services
 import { login } from "../services/user.service";
 
@@ -32,8 +37,8 @@ export default function Login() {
                 cancelButton={false}
                 buttonText={'Sign In'}
                 />
-                <p>New User?<Link to='/create-account'>Create Account</Link> 
-                </p>
+                <p>New User?</p>
+                <ButtonStyles onClick={()=> navigate('/create-account')}>Create Account</ButtonStyles>
             </ModalStyles>
         </ModalContainerStyles>
         </>
