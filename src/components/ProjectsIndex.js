@@ -4,20 +4,16 @@ import Form from "./Form";
 
 //Components
 import ProjectCard from "./ProjectCard";
-import { AddButtonStyles, ProjectsIndexStyles } from "./styles";
-
-//Firebase imports
-import { auth, db } from "../services/firebase";
 import {
-  doc,
-  serverTimestamp,
-  updateDoc,
-  deleteDoc,
-  arrayRemove,
-} from "firebase/firestore";
+  AddButtonStyles,
+  CardContainerStyles,
+  ModalContainerStyles,
+  ModalStyles,
+  MainHeaderStyles,
+} from "./styles";
 //Services
+import { serverTimestamp } from "firebase/firestore";
 import { fetchAllProjects, add, remove } from "../services/project.service";
-import { ModalContainerStyles, ModalStyles } from "./styles";
 
 
 
@@ -77,7 +73,7 @@ export default function ProjectsIndex() {
     
 
     return (
-        <ProjectsIndexStyles>
+        <>
             {modal && 
             <ModalContainerStyles>
                 <ModalStyles>
@@ -89,16 +85,16 @@ export default function ProjectsIndex() {
             </ModalContainerStyles>    
             }
 
-            <header className="prj-head">    
+            <MainHeaderStyles>    
                 <h1>Your Projects</h1>
                 <AddButtonStyles onClick={openCloseModal}>
                 +</AddButtonStyles> 
-            </header>
+            </MainHeaderStyles>
 
-            <div className="projects">
+            <CardContainerStyles>
                 {projectCards}
-            </div>    
+            </CardContainerStyles>    
 
-        </ProjectsIndexStyles>
+        </>
     )
 }

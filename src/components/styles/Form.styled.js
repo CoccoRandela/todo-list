@@ -13,4 +13,11 @@ export const FormStyles = styled.form`
         color: ${({theme}) => theme.colors.dark}
     }
 
+    select {
+        padding: .5em 1em;
+        border-radius: 1em;
+        border: none;
+        color: ${({theme}) => theme.colors.dark}
+    }
+
 `

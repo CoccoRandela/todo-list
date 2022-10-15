@@ -38,7 +38,7 @@ export default function Form({ fields, submitFunc, cancelButton, buttonText, clo
             {formFields}
             <div>
                 { cancelButton && 
-                <ButtonStyles onClick={closeModal}>Cancel</ButtonStyles>
+                <ButtonStyles mr='.5em' onClick={closeModal}>Cancel</ButtonStyles>
                 }
                 <ButtonStyles type="submit">{buttonText}</ButtonStyles>    
             </div>

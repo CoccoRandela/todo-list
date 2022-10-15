@@ -1,11 +1,12 @@
 import { FormStyles } from "./Form.styled";
 import { GlobalStyles } from "./Global.styled";
 import { ModalStyles } from "./Modal.styled";
-import { HeaderStyles } from "./Header.styled"
+import { HeaderStyles, MainHeaderStyles } from "./Header.styled"
 import { ModalContainerStyles } from "./ModalContainer.styled";
 import { ButtonStyles, AddButtonStyles } from "./Button.styled";
 import { NavbarStyles } from "./Navbar.styled";
-import { ProjectsIndexStyles } from "./ProjectsIndex.styled";
+import { CardContainerStyles } from "./CardContainer.styled";
+import { CardStyles } from "./Card.styled";
 
 
 export {
@@ -14,8 +15,10 @@ export {
   FormStyles,
   NavbarStyles,
   HeaderStyles,
+  MainHeaderStyles,
   ButtonStyles,
   AddButtonStyles,
-  ProjectsIndexStyles,
+  CardContainerStyles,
+  CardStyles,
   GlobalStyles,
 };

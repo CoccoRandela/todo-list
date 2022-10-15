@@ -6,4 +6,12 @@ import Login from "./Login";
 import CreateAccount from "./CreateAccount";
 import Wrapper from './Wrapper'
 
-export { Navbar, ProjectsIndex, Calendar, ProjectPage, Login, CreateAccount, Wrapper };
+export {
+  Navbar,
+  ProjectsIndex,
+  Calendar,
+  ProjectPage,
+  Login,
+  CreateAccount,
+  Wrapper,
+};

@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 //Components
-import ModalForm from "./Form";
+import Form from "./Form";
 import TodoCard from "./TodoCard";
+import { AddButtonStyles, MainHeaderStyles, ModalStyles, ModalContainerStyles } from "./styles";
 //Firebase Imports
 import { db } from "../services/firebase";
 import {
@@ -19,6 +20,7 @@ import {
 } from "firebase/firestore";
 
 import { deleteTodofromDatabase } from "../services/todo.service";
+
 
 export default function Project() {
 
@@ -90,18 +92,26 @@ export default function Project() {
     })
 
     return (
-        <div className="index">
-            {modal && <ModalForm item="todo" options={['title', 'dueDate', 'priority']} addItem={addTodo} closeModal={openCloseModal}/>}
+        <>
+            {modal && <ModalContainerStyles>
+                <ModalStyles>
+                    <Form 
+                    fields={['title', 'dueDate', 'priority']} submitFunc={addTodo} 
+                    cancelButton={true}
+                    buttonText={'Add Todo'} closeModal={openCloseModal}/>
+                </ModalStyles>
+            </ModalContainerStyles>}
 
-            <header className="prj-head">    
+            <MainHeaderStyles >    
                 <h1>{state.title}</h1>
-                <button className="add-todo-btn" onClick={openCloseModal}>+</button>
-            </header>
+                <AddButtonStyles onClick={openCloseModal}>+
+                </AddButtonStyles>
+            </MainHeaderStyles>
 
             <div className="todos">
                 {todoCards}
             </div>    
             
-        </div>
+        </>
     )
 }

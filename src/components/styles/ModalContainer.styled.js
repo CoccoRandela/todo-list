@@ -6,6 +6,7 @@ export const ModalContainerStyles = styled.div`
     min-width: 100%;
     min-height: 100vh;
     display: grid;
-    place-items: center
-    
+    place-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+
 `

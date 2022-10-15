@@ -1,5 +1,5 @@
 import { db, auth } from "./firebase";
-import { doc, getDoc, updateDoc, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, updateDoc, addDoc, deleteDoc,  arrayUnion, arrayRemove } from "firebase/firestore";
 import { fetchUserDoc } from "./user.service";
 
 function fetchAllProjects() {

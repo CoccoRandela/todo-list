@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 //Firebase Imports
 import { db } from "../services/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { CardStyles } from "./styles";
 
 export default function ProjectCard({projectInfo, deleteProject}) {
 
@@ -25,7 +26,7 @@ export default function ProjectCard({projectInfo, deleteProject}) {
 
 
     return (
-        <div className="project">
+        <CardStyles>
             <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
                 setCardInfo({
                     ...cardInfo,
@@ -40,6 +41,6 @@ export default function ProjectCard({projectInfo, deleteProject}) {
             }} />
             <button onClick={openProject}>Open</button>
             <button onClick={() => deleteProject(cardInfo.id)}>Delete</button>     
-        </div>
+        </CardStyles>
     )
 }
