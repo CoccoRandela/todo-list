@@ -26,7 +26,7 @@ export default function ProjectCard({projectInfo, deleteProject}) {
 
 
     return (
-        <CardStyles>
+        <CardStyles r='2'>
             <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
                 setCardInfo({
                     ...cardInfo,

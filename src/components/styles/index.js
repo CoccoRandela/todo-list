@@ -7,6 +7,7 @@ import { ButtonStyles, AddButtonStyles, CardButtonStyles } from "./Button.styled
 import { NavbarStyles } from "./Navbar.styled";
 import { CardContainerStyles } from "./CardContainer.styled";
 import { CardStyles } from "./Card.styled";
+import { CbContainerStyles } from "./CheckboxContainer.styled";
 
 
 export {
@@ -21,5 +22,6 @@ export {
   CardButtonStyles,
   CardContainerStyles,
   CardStyles,
+  CbContainerStyles,
   GlobalStyles,
 };

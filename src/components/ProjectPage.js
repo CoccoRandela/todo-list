@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 //Components
 import Form from "./Form";
 import TodoCard from "./TodoCard";
-import { AddButtonStyles, MainHeaderStyles, ModalStyles, ModalContainerStyles } from "./styles";
+import { AddButtonStyles, MainHeaderStyles, ModalStyles, ModalContainerStyles, CardContainerStyles } from "./styles";
 //Firebase Imports
 import { db } from "../services/firebase";
 import {
@@ -108,9 +108,9 @@ export default function Project() {
                 </AddButtonStyles>
             </MainHeaderStyles>
 
-            <div className="todos">
+            <CardContainerStyles>
                 {todoCards}
-            </div>    
+            </CardContainerStyles>    
             
         </>
     )

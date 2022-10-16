@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
+import { CbContainerStyles } from "./styles";
 
 
 export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbox, deleteCheckbox }) {
@@ -12,7 +13,7 @@ export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbo
     })
 
     return (
-        <div className="c-box-cont">
+        <CbContainerStyles>
             <header>
                 <button onClick={() => setBoxActive(boxActive === false ? true: false)}>\/</button>
                 <h4>Checkboxes</h4>
@@ -24,6 +25,6 @@ export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbo
                     <span>__________</span>
                 </div>
             </div>}
-        </div>
+        </CbContainerStyles>
     )
 }

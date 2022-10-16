@@ -11,8 +11,6 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
 
     const [cardInfo, setCardInfo] = useState(todoInfo)
 
-    console.log(cardInfo)
-
     useEffect(() => {
         setDoc(doc(db, 'todos', `${cardInfo.id}`), cardInfo)
 
@@ -22,13 +20,19 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
     function addColor() {
         switch(cardInfo.priority) {
             case 'low':
-                return 'green';
+                return ({theme}) => 
+                theme.colors.lowP
+                ;
                 break;
             case 'medium':
-                return 'yellow';
+                return  ({theme}) => 
+                theme.colors.medP
+                ;
                 break;
             case 'high':
-                return 'red';
+                return  ({theme}) => 
+                theme.colors.highP
+                ;
                 break;
         }
     }
@@ -103,7 +107,7 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
     }
 
     return (
-        <CardStyles>
+        <CardStyles r='3' c={addColor}>
 
             <div>
                 <button onClick={() => {
