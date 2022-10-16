@@ -4,9 +4,9 @@ export const CardStyles = styled.div`
 
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: repeat(${({r}) => r}, minmax(min-content, 1em));
     row-gap: .5em;
-    background-color: ${({theme}) => theme.colors.dark};
+    background-color: ${({c, theme}) => c ? c : theme.colors.dark};
     padding: 1em;
     border-radius: 1em;
 
