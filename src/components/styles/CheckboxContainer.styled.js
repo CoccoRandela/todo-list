@@ -17,15 +17,17 @@ export const CbContainerStyles = styled.div`
             margin: 0;
         }
 
-        button {
-            background-color: ${({c}) => c};
-            border: none;
-            font-size: 1.5rem;
-            transition: transform 0.1s ease-in;
+        button  {
+            transition: writing-mode 0.1s ease-in;
         }
 
-        button.active {
-            transform: rotate(90deg)
+        button.active  {
+            writing-mode: vertical-rl;
         }
+    }
+
+    div {
+        display: grid;
+        gap: .5em;
     }
 `

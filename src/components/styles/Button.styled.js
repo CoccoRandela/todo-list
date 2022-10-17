@@ -24,7 +24,6 @@ export const AddButtonStyles = styled(ButtonStyles)`
     font-size: 1.5rem;  
 
     &:hover {
-        transform: scale(1.05);
         background-color: ${({theme}) => theme.colors.mid};
         color: ${({theme}) => theme.colors.dark};
     }
@@ -33,8 +32,21 @@ export const AddButtonStyles = styled(ButtonStyles)`
 export const CardButtonStyles = styled(ButtonStyles)` 
 
     &:hover {
-        transform: scale(1.05);
         background-color: ${({theme}) => theme.colors.mid};
         color: ${({theme}) => theme.colors.light};
     }
+`
+
+export const TodoButtonStyles = styled(ButtonStyles)` 
+
+    background-color: transparent;
+    font-size: ${({fs}) => fs? fs : '.9rem'};
+    color: ${({theme}) => theme.colors.light};
+    border: .1em solid ${({theme}) => theme.colors.light};
+
+    &:hover {
+        background-color: ${({theme}) => theme.colors.light};
+        color: ${({theme}) => theme.colors.dark};
+    }
+    
 `

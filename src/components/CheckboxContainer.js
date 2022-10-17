@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
-import { CardButtonStyles, CbContainerStyles } from "./styles";
+import { CardButtonStyles, CbContainerStyles, TodoButtonStyles } from "./styles";
 import addColor from "./styles/addColor";
 
 
@@ -20,20 +20,18 @@ export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbo
     return (
         <CbContainerStyles c={() => addColor(priority)}>
             <header>
-                <button 
+                <TodoButtonStyles 
                 onClick={(e) => {
                     openBox();
                     e.target.classList.toggle('active');
-                }}> &gt; </button>
+                }}> &gt;
+                </TodoButtonStyles>
                 <h4>Checkboxes</h4>
             </header>
             {boxActive && 
             <div>
                 {cbPanels}
-                <div className="checkbox">
-                    <button className="create-cb" onClick={addCheckbox}>+ </button>
-                    <span>__________</span>
-                </div>
+                <TodoButtonStyles className="create-cb" onClick={addCheckbox}>+ </TodoButtonStyles>
             </div>}
         </CbContainerStyles>
     )

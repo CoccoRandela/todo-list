@@ -5,7 +5,7 @@ import CheckboxContainer from "./CheckboxContainer";
 //Firebase Imports
 import { db } from "../services/firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { AddButtonStyles, CardButtonStyles, CardStyles } from "./styles";
+import { AddButtonStyles, CardButtonStyles, CardStyles, TodoButtonStyles } from "./styles";
 import addColor from "./styles/addColor";
 
 export default function TodoCard({ todoInfo, deleteTodo }) {
@@ -17,26 +17,6 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
 
     }, [cardInfo])
 
-
-    // function addColor() {
-    //     switch(cardInfo.priority) {
-    //         case 'low':
-    //             return ({theme}) => 
-    //             theme.colors.lowP
-    //             ;
-    //             break;
-    //         case 'medium':
-    //             return  ({theme}) => 
-    //             theme.colors.medP
-    //             ;
-    //             break;
-    //         case 'high':
-    //             return  ({theme}) => 
-    //             theme.colors.highP
-    //             ;
-    //             break;
-    //     }
-    // }
 
     function togglePriority() {
         switch (cardInfo.priority) {
@@ -111,11 +91,11 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
         <CardStyles r='3' c={() => addColor(cardInfo.priority)}>
 
             <div>
-                <CardButtonStyles onClick={() => {
+                <TodoButtonStyles onClick={() => {
                     togglePriority()
                     }}>
                     {cardInfo.priority}
-                </CardButtonStyles>
+                </TodoButtonStyles>
             </div>
 
             <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
@@ -142,7 +122,7 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
                 })
             }}/>    
 
-            <CardButtonStyles onClick={() => deleteTodo(cardInfo)}>Delete</CardButtonStyles>   
+            <TodoButtonStyles onClick={() => deleteTodo(cardInfo)}>Delete</TodoButtonStyles>   
 
         </CardStyles>
     )
