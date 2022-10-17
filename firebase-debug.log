@@ -124,3 +124,66 @@ INFO: Detected non-HTTP/2 connection.
 [debug] [2022-10-17T09:04:37.552Z] Oct 17, 2022 10:04:37 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
 INFO: Unknown request URI: /ws/discovery
  {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:37 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:18:58.439Z] Oct 17, 2022 10:18:58 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:18:58 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:18:58.441Z] Oct 17, 2022 10:18:58 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:18:58 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:19:00.455Z] Oct 17, 2022 10:19:00 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:19:00 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:19:00.456Z] Oct 17, 2022 10:19:00 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:19:00 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:21:01.965Z] Oct 17, 2022 10:21:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:01.967Z] Oct 17, 2022 10:21:01 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:01 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:21:03.984Z] Oct 17, 2022 10:21:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:03.985Z] Oct 17, 2022 10:21:03 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:03 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:21:04.435Z] Oct 17, 2022 10:21:04 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:04 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:04.437Z] Oct 17, 2022 10:21:04 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:04 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:21:06.018Z] Oct 17, 2022 10:21:06 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:06 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:06.021Z] Oct 17, 2022 10:21:06 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:06 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:21:08.049Z] Oct 17, 2022 10:21:08 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:08 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:08.053Z] Oct 17, 2022 10:21:08 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:08 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:21:10.956Z] Oct 17, 2022 10:21:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:10.992Z] Oct 17, 2022 10:21:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:12.032Z] Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:12.054Z] Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:12.431Z] Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:12.461Z] Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:12 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:21:59.055Z] Oct 17, 2022 10:21:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:21:59 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}

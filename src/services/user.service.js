@@ -1,6 +1,6 @@
 import { db, auth } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 function fetchUserDoc() {
     return getDoc(doc(db, 'users', `${auth.currentUser.uid}`))
