@@ -93,7 +93,7 @@ export default function Project() {
 
     return (
         <>
-            {modal && <ModalContainerStyles>
+            {modal && <ModalContainerStyles opacity='0.8'>
                 <ModalStyles>
                     <Form 
                     fields={['title', 'dueDate', 'priority']} submitFunc={addTodo} 

@@ -20,7 +20,8 @@ export const ButtonStyles = styled.button`
 
 export const AddButtonStyles = styled(ButtonStyles)`
     background-color: ${({theme}) => theme.colors.dark}; 
-    color: ${({theme}) => theme.colors.light};  
+    color: ${({theme}) => theme.colors.light};
+    font-size: 1.5rem;  
 
     &:hover {
         transform: scale(1.05);

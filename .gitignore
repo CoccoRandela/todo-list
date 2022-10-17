@@ -1,3 +1,5 @@
 node_modules
 ui-debug.log
 firestore_debug.log
+firestore-debug.log
+ui-debug.log

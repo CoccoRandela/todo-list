@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
-import { CbContainerStyles } from "./styles";
+import { CardButtonStyles, CbContainerStyles } from "./styles";
+import addColor from "./styles/addColor";
 
 
-export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbox, deleteCheckbox }) {
+export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbox, deleteCheckbox, priority }) {
 
-    const [boxActive, setBoxActive] = useState(false)
+    const [boxActive, setBoxActive] = useState(false);
+
+    function openBox() {
+        setBoxActive(boxActive === false ? true: false);
+    }
 
 
     const cbPanels = checkboxes.map(checkbox => {
@@ -13,12 +18,17 @@ export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbo
     })
 
     return (
-        <CbContainerStyles>
+        <CbContainerStyles c={() => addColor(priority)}>
             <header>
-                <button onClick={() => setBoxActive(boxActive === false ? true: false)}>\/</button>
+                <button 
+                onClick={(e) => {
+                    openBox();
+                    e.target.classList.toggle('active');
+                }}> &gt; </button>
                 <h4>Checkboxes</h4>
             </header>
-            {boxActive && <div className="check-boxes">
+            {boxActive && 
+            <div>
                 {cbPanels}
                 <div className="checkbox">
                     <button className="create-cb" onClick={addCheckbox}>+ </button>

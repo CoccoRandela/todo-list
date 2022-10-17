@@ -5,7 +5,8 @@ import CheckboxContainer from "./CheckboxContainer";
 //Firebase Imports
 import { db } from "../services/firebase";
 import { setDoc, doc } from "firebase/firestore";
-import { CardStyles } from "./styles";
+import { AddButtonStyles, CardButtonStyles, CardStyles } from "./styles";
+import addColor from "./styles/addColor";
 
 export default function TodoCard({ todoInfo, deleteTodo }) {
 
@@ -17,25 +18,25 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
     }, [cardInfo])
 
 
-    function addColor() {
-        switch(cardInfo.priority) {
-            case 'low':
-                return ({theme}) => 
-                theme.colors.lowP
-                ;
-                break;
-            case 'medium':
-                return  ({theme}) => 
-                theme.colors.medP
-                ;
-                break;
-            case 'high':
-                return  ({theme}) => 
-                theme.colors.highP
-                ;
-                break;
-        }
-    }
+    // function addColor() {
+    //     switch(cardInfo.priority) {
+    //         case 'low':
+    //             return ({theme}) => 
+    //             theme.colors.lowP
+    //             ;
+    //             break;
+    //         case 'medium':
+    //             return  ({theme}) => 
+    //             theme.colors.medP
+    //             ;
+    //             break;
+    //         case 'high':
+    //             return  ({theme}) => 
+    //             theme.colors.highP
+    //             ;
+    //             break;
+    //     }
+    // }
 
     function togglePriority() {
         switch (cardInfo.priority) {
@@ -107,12 +108,14 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
     }
 
     return (
-        <CardStyles r='3' c={addColor}>
+        <CardStyles r='3' c={() => addColor(cardInfo.priority)}>
 
             <div>
-                <button onClick={() => {
+                <CardButtonStyles onClick={() => {
                     togglePriority()
-                    }}>{cardInfo.priority}</button>
+                    }}>
+                    {cardInfo.priority}
+                </CardButtonStyles>
             </div>
 
             <input type="text" defaultValue={cardInfo.title} onChange={(e) => {
@@ -122,7 +125,15 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
                 })
             }}/>
 
-            {cardInfo.checkboxes && <CheckboxContainer checkboxes={cardInfo.checkboxes} addCheckbox={addCheckbox} editCheckbox={editCheckbox} deleteCheckbox={deleteCheckbox}/>} 
+            {cardInfo.checkboxes && 
+                <CheckboxContainer
+                checkboxes={cardInfo.checkboxes}
+                addCheckbox={addCheckbox} 
+                editCheckbox={editCheckbox} 
+                deleteCheckbox={deleteCheckbox}
+                priority={cardInfo.priority}
+                />
+            } 
 
             <input type="date" defaultValue={cardInfo.dueDate} onChange={(e) => {
                 setCardInfo({
@@ -131,7 +142,7 @@ export default function TodoCard({ todoInfo, deleteTodo }) {
                 })
             }}/>    
 
-            <button onClick={() => deleteTodo(cardInfo)}>Delete</button>   
+            <CardButtonStyles onClick={() => deleteTodo(cardInfo)}>Delete</CardButtonStyles>   
 
         </CardStyles>
     )

@@ -22,7 +22,7 @@ export const FormStyles = styled.form`
 
     div {
         display: flex;
-        justify-content: space-between;
+        gap: 1em;
     }
 
 `

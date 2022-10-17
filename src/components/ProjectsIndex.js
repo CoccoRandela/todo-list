@@ -75,7 +75,7 @@ export default function ProjectsIndex() {
     return (
         <>
             {modal && 
-            <ModalContainerStyles>
+            <ModalContainerStyles opacity='0.8'>
                 <ModalStyles>
                     <Form 
                     fields={['title', 'description']} submitFunc={addProject} 
