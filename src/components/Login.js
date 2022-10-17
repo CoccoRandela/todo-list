@@ -28,7 +28,7 @@ export default function Login() {
         <HeaderStyles>
             <h2>BetterLate</h2>
         </HeaderStyles>
-        <ModalContainerStyles>
+        <ModalContainerStyles opacity='0.0'>
             <ModalStyles>
                 <h3>Welcome Back!</h3>
                 <Form 

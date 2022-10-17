@@ -1,0 +1,126 @@
+[debug] [2022-10-17T09:03:48.053Z] ----------------------------------------------------------------------
+[debug] [2022-10-17T09:03:48.055Z] Command:       /Users/roccocandela/.nvm/versions/node/v16.14.2/bin/node /Users/roccocandela/.nvm/versions/node/v16.14.2/bin/firebase emulators:start
+[debug] [2022-10-17T09:03:48.056Z] CLI Version:   11.14.1
+[debug] [2022-10-17T09:03:48.056Z] Platform:      darwin
+[debug] [2022-10-17T09:03:48.056Z] Node Version:  v16.14.2
+[debug] [2022-10-17T09:03:48.057Z] Time:          Mon Oct 17 2022 10:03:48 GMT+0100 (Western European Summer Time)
+[debug] [2022-10-17T09:03:48.057Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-10-17T09:03:48.142Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-10-17T09:03:48.143Z] > authorizing via signed-in user (rocco.candela94@gmail.com)
+[debug] [2022-10-17T09:03:48.241Z] java version "19" 2022-09-20
+
+[debug] [2022-10-17T09:03:48.242Z] Java(TM) SE Runtime Environment (build 19+36-2238)
+Java HotSpot(TM) 64-Bit Server VM (build 19+36-2238, mixed mode, sharing)
+
+[debug] [2022-10-17T09:03:48.246Z] Parsed Java major version: 19
+[info] i  emulators: Starting emulators: auth, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore"}}
+[debug] [2022-10-17T09:03:48.271Z] [hub] writing locator at /var/folders/7y/fgpkjdkn4hzc2fx179fc4z7c0000gn/T/hub-todo-list-b322d.json
+[warn] ⚠  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
+[warn] ⚠  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2022-10-17T09:03:48.312Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-10-17T09:03:48.313Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2022-10-17T09:03:48.313Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/roccocandela/.cache/firebase/emulators/cloud-firestore-emulator-v1.15.1.jar","--host","localhost","--port",3001,"--websocket_port",9150,"--project_id","todo-list-b322d","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/roccocandela/.cache/firebase/emulators/cloud-firestore-emulator-v1.15.1.jar\",\"--host\",\"localhost\",\"--port\",3001,\"--websocket_port\",9150,\"--project_id\",\"todo-list-b322d\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2022-10-17T09:03:49.385Z] Oct 17, 2022 10:03:49 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:03:49 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:9150\n"}}
+[debug] [2022-10-17T09:03:49.425Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2022-10-17T09:03:49.426Z] localhost:3001 {"metadata":{"emulator":{"name":"firestore"},"message":"localhost:3001"}}
+[debug] [2022-10-17T09:03:49.426Z] 
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n"}}
+[debug] [2022-10-17T09:03:49.427Z] 
+   export FIRESTORE_EMULATOR_HOST=localhost:3001
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\n   export FIRESTORE_EMULATOR_HOST=localhost:3001\n\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2022-10-17T09:03:57.469Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-10-17T09:03:57.469Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-10-17T09:03:57.469Z] Starting Emulator UI with command {"binary":"node","args":["/Users/roccocandela/.cache/firebase/emulators/ui-v1.10.0/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/roccocandela/.cache/firebase/emulators/ui-v1.10.0/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-10-17T09:03:57.610Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ localhost:9099 │ http://localhost:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ localhost:3001 │ http://localhost:4000/firestore │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2022-10-17T09:04:22.696Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:22.720Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:22.752Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:22.756Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:22.909Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:22.911Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:22.931Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:22.932Z] Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:22.950Z] Oct 17, 2022 10:04:22 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:22 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2022-10-17T09:04:25.044Z] Oct 17, 2022 10:04:25 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:25 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:25.050Z] Oct 17, 2022 10:04:25 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:25 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:26.682Z] Oct 17, 2022 10:04:26 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:26 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:26.684Z] Oct 17, 2022 10:04:26 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:26 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:28.702Z] Oct 17, 2022 10:04:28 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:28 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:28.704Z] Oct 17, 2022 10:04:28 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:28 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:30.724Z] Oct 17, 2022 10:04:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:30 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:30.726Z] Oct 17, 2022 10:04:30 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:30 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:32.747Z] Oct 17, 2022 10:04:32 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:32 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:32.749Z] Oct 17, 2022 10:04:32 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:32 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}
+[debug] [2022-10-17T09:04:37.549Z] Oct 17, 2022 10:04:37 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:37 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2022-10-17T09:04:37.552Z] Oct 17, 2022 10:04:37 AM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /ws/discovery
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Oct 17, 2022 10:04:37 AM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /ws/discovery\n"}}

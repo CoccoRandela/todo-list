@@ -7,6 +7,6 @@ export const ModalContainerStyles = styled.div`
     min-height: 100vh;
     display: grid;
     place-items: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, ${({opacity}) => opacity});
 
 `

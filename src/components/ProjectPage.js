@@ -98,7 +98,8 @@ export default function Project() {
                     <Form 
                     fields={['title', 'dueDate', 'priority']} submitFunc={addTodo} 
                     cancelButton={true}
-                    buttonText={'Add Todo'} closeModal={openCloseModal}/>
+                    buttonText={'Add Todo'} 
+                    returnFunc={openCloseModal}/>
                 </ModalStyles>
             </ModalContainerStyles>}
 

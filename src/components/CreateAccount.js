@@ -38,8 +38,9 @@ export default function CreateAccount() {
                 <Form 
                 fields={['email', 'password']} 
                 submitFunc={redirectToHomepage}
-                cancelButton={false}
+                cancelButton={true}
                 buttonText={'Sign Up'}
+                returnFunc={() => navigate('/login')}
                 />
             </ModalStyles>
         </ModalContainerStyles>

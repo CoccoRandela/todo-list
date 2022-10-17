@@ -80,7 +80,8 @@ export default function ProjectsIndex() {
                     <Form 
                     fields={['title', 'description']} submitFunc={addProject} 
                     cancelButton={true}
-                    buttonText={'Add Project'} closeModal={openCloseModal}/>
+                    buttonText={'Add Project'} 
+                    returnFunc={openCloseModal}/>
                 </ModalStyles>
             </ModalContainerStyles>    
             }

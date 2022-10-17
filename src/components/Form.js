@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextInput, SelectInput, DateInput } from "./FormInputs";
 import { ButtonStyles, FormStyles } from "./styles";
 
-export default function Form({ fields, submitFunc, cancelButton, buttonText, closeModal }) {  
+export default function Form({ fields, submitFunc, cancelButton, buttonText, returnFunc }) {  
 
     const [inputs, setInputs] = useState({});
 
@@ -11,6 +11,11 @@ export default function Form({ fields, submitFunc, cancelButton, buttonText, clo
     function handleSubmit(e) {
         e.preventDefault();
         submitFunc(inputs);
+    }
+
+    function handleReturn(e) {
+        e.preventDefault();
+        returnFunc();
     }
 
     function handleChange(e, field) {
@@ -40,7 +45,7 @@ export default function Form({ fields, submitFunc, cancelButton, buttonText, clo
             {formFields}
             <div>
                 { cancelButton && 
-                <ButtonStyles mr='.5em' onClick={closeModal}>Cancel</ButtonStyles>
+                <ButtonStyles onClick={handleReturn}>Cancel</ButtonStyles>
                 }
                 <ButtonStyles type="submit">{buttonText}</ButtonStyles>    
             </div>

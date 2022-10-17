@@ -20,4 +20,9 @@ export const FormStyles = styled.form`
         color: ${({theme}) => theme.colors.dark}
     }
 
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
+
 `
