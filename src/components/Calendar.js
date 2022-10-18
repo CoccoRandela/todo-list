@@ -10,6 +10,8 @@ import { db, auth } from "../services/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { fetchUserDoc } from "../services/user.service";
 import { deleteTodofromDatabase } from "../services/todo.service";
+import { AddButtonStyles, ButtonStyles, CardContainerStyles, ModalContainerStyles, HeaderStyles } from "./styles";
+import { CalendarStyles } from "./styles/Calendar.styled";
 
 
 export default function CalendarPage() {
@@ -62,18 +64,21 @@ export default function CalendarPage() {
 
 
     return (
-        <>
-        {modal && <div className="modal">
-                <div className="day-content">
-                    <button onClick={() => setModal(false)}>Back</button>
+        <CalendarStyles>
+        {modal && <ModalContainerStyles opacity='0.9' pi='start'>
+                <HeaderStyles>
+                    <h2>Your Todos for Today:</h2>
+                    <AddButtonStyles onClick={() => setModal(false)}>Back</AddButtonStyles>
+                </HeaderStyles>
+                <CardContainerStyles>
                     {cards}
-                </div>
-            </div>}
+                </CardContainerStyles>
+            </ModalContainerStyles>}
         <Calendar tileClassName={assignClass}
         onClickDay={value => {
             setModal(true)
             setTodostoDisplay(getTodosofDate(value))
         }}/>
-        </>
+        </CalendarStyles>
     )
 }

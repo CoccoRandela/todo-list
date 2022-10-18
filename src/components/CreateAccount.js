@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //Components
-import { ModalStyles, ModalContainerStyles, HeaderStyles } from "./styles";
+import { ModalStyles, ModalContainerStyles, HeaderStyles, HeaderWrapperStyles } from "./styles";
 import Form from "./Form";
 //Services
 import { createUser, createUserDoc } from "../services/user.service";
@@ -29,9 +29,11 @@ export default function CreateAccount() {
 
     return (
         <>
-        <HeaderStyles>
-            <h2>BetterLate</h2>
-        </HeaderStyles>
+        <HeaderWrapperStyles>
+            <HeaderStyles>
+                <h2>BetterLate</h2>
+            </HeaderStyles>
+        </HeaderWrapperStyles>
         <ModalContainerStyles>
             <ModalStyles>
                 <h3>Join now!</h3>

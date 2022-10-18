@@ -8,6 +8,7 @@ import {
   ModalContainerStyles,
   HeaderStyles,
   ButtonStyles,
+  HeaderWrapperStyles,
 } from "./styles";
 //Services
 import { login } from "../services/user.service";
@@ -25,9 +26,11 @@ export default function Login() {
 
     return (
         <>
-        <HeaderStyles>
+        <HeaderWrapperStyles>
+            <HeaderStyles>
             <h2>BetterLate</h2>
-        </HeaderStyles>
+            </HeaderStyles>
+        </HeaderWrapperStyles>
         <ModalContainerStyles opacity='0.0'>
             <ModalStyles>
                 <h3>Welcome Back!</h3>
