@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const HeaderStyles = styled.header`
     display: flex;
     justify-content: space-between;
-    padding: 1em;
+    max-width: 90%;
+    padding: 2em 0;
+    margin: 0 auto;
     background-color: ${({theme}) => theme.colors.mid};
     color: ${({theme}) => theme.colors.light};
     h2 {

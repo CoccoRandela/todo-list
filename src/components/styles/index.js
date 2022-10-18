@@ -1,7 +1,8 @@
 import { FormStyles } from "./Form.styled";
 import { GlobalStyles } from "./Global.styled";
 import { ModalStyles } from "./Modal.styled";
-import { HeaderStyles, MainHeaderStyles } from "./Header.styled"
+import { HeaderStyles, MainHeaderStyles } from "./Header.styled";
+import { HeaderWrapperStyles } from "./HeaderWrapper.styled";
 import { ModalContainerStyles } from "./ModalContainer.styled";
 import {
   ButtonStyles,
@@ -23,6 +24,7 @@ export {
   NavbarStyles,
   HeaderStyles,
   MainHeaderStyles,
+  HeaderWrapperStyles,
   ButtonStyles,
   AddButtonStyles,
   CardButtonStyles,

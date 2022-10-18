@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 //Components
 import { Calendar, Navbar, ProjectPage, ProjectsIndex } from "./index";
-import { ButtonStyles, HeaderStyles } from "./styles";
+import { ButtonStyles, HeaderStyles, HeaderWrapperStyles } from "./styles";
 //Services
 import { fetchUser, logout } from "../services/user.service";
 
@@ -33,11 +33,13 @@ export default function Wrapper() {
 
     return (
         user && <>
-            <HeaderStyles>
-                <h2>BetterLate</h2>
-                <ButtonStyles onClick={redirectToLogin}>Sign Out</ButtonStyles>
-            </HeaderStyles>
-            <Navbar/>
+            <HeaderWrapperStyles>
+                <HeaderStyles>
+                    <h2>BetterLate</h2>
+                    <ButtonStyles onClick={redirectToLogin}>Sign Out</ButtonStyles>
+                </HeaderStyles>
+                <Navbar/>
+            </HeaderWrapperStyles>
             <Routes>
                 <Route path="/" element={<Navigate to='/projects' />} />
                 <Route path="/projects" element={<ProjectsIndex />} />
