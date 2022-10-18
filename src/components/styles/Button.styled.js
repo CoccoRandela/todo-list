@@ -44,9 +44,10 @@ export const TodoButtonStyles = styled(ButtonStyles)`
     color: ${({theme}) => theme.colors.light};
     border: .1em solid ${({theme}) => theme.colors.light};
 
+
     &:hover {
         background-color: ${({theme}) => theme.colors.light};
         color: ${({theme}) => theme.colors.dark};
     }
-    
+
 `

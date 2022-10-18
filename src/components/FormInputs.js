@@ -39,8 +39,11 @@ function SelectInput({field, options, handleChange}) {
     return (
         <select
         onChange={(e) => handleChange(e, field)}
+        required
         >   
-            <option disabled selected>
+            <option disabled 
+            value= ''
+            selected>
                 priority
             </option>
             {optionSlots}

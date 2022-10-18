@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
-import { CardButtonStyles, CbContainerStyles, TodoButtonStyles } from "./styles";
+import { CbContainerStyles, TodoButtonStyles } from "./styles";
 import addColor from "./styles/addColor";
-
+import arrow from '../arrow.svg';
+import SVG from 'react-inlinesvg';
 
 export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbox, deleteCheckbox, priority }) {
 
@@ -24,7 +25,7 @@ export default function CheckboxContainer({ checkboxes, addCheckbox, editCheckbo
                 onClick={(e) => {
                     openBox();
                     e.target.classList.toggle('active');
-                }}> &gt;
+                }}> <SVG src={arrow} fill='red'/>
                 </TodoButtonStyles>
                 <h4>Checkboxes</h4>
             </header>

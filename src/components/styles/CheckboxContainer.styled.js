@@ -8,6 +8,7 @@ export const CbContainerStyles = styled.div`
         display: flex;
         gap: 1em;
         align-items: center;
+        margin-bottom: .5em;
 
         * {
         color: ${({theme}) => theme.colors.light}
@@ -17,12 +18,30 @@ export const CbContainerStyles = styled.div`
             margin: 0;
         }
 
-        button  {
-            transition: writing-mode 0.1s ease-in;
+        button {
+            display: grid;
+            justify-content: center;
         }
 
-        button.active  {
-            writing-mode: vertical-rl;
+        button > svg {
+            pointer-events: none;
+            height: .5em;
+            width: .5em;
+            path {
+                transition: stroke 0.2s linear 0.2s;
+                fill: transparent;
+                stroke: ${({theme}) => theme.colors.light}
+            }
+        }
+
+        button:hover > svg {
+            path {
+                stroke: ${({theme}) => theme.colors.dark};
+            }
+        }
+
+        button.active > svg {
+            transform: rotate(90deg);
         }
     }
 
