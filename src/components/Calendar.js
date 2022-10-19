@@ -10,7 +10,7 @@ import { db, auth } from "../services/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { fetchUserDoc } from "../services/user.service";
 import { deleteTodofromDatabase } from "../services/todo.service";
-import { AddButtonStyles, ButtonStyles, CardContainerStyles, ModalContainerStyles, HeaderStyles } from "./styles";
+import { AddButtonStyles, ButtonStyles, CardContainerStyles, ModalContainerStyles, HeaderStyles, HeaderWrapperStyles } from "./styles";
 import { CalendarStyles } from "./styles/Calendar.styled";
 
 
@@ -64,21 +64,27 @@ export default function CalendarPage() {
 
 
     return (
-        <CalendarStyles>
-        {modal && <ModalContainerStyles opacity='0.9' pi='start'>
-                <HeaderStyles>
-                    <h2>Your Todos for Today:</h2>
-                    <AddButtonStyles onClick={() => setModal(false)}>Back</AddButtonStyles>
-                </HeaderStyles>
+        <>
+        {modal && <>
+            <ModalContainerStyles opacity='0.9' pi='start'>
+                <HeaderWrapperStyles>
+                    <HeaderStyles>
+                        <h2>Your Todos for Today:</h2>
+                        <ButtonStyles onClick={() => setModal(false)}>Back</ButtonStyles>
+                    </HeaderStyles>
+                </HeaderWrapperStyles>
                 <CardContainerStyles>
                     {cards}
                 </CardContainerStyles>
-            </ModalContainerStyles>}
-        <Calendar tileClassName={assignClass}
-        onClickDay={value => {
-            setModal(true)
-            setTodostoDisplay(getTodosofDate(value))
-        }}/>
-        </CalendarStyles>
+            </ModalContainerStyles>
+            </>}
+            <CalendarStyles onClick={(e) => console.log(e.pageX, e.pageY)}>
+                <Calendar tileClassName={assignClass}
+                onClickDay={value => {
+                    setModal(true)
+                    setTodostoDisplay(getTodosofDate(value))
+                }}/>
+            </CalendarStyles>
+        </>
     )
 }

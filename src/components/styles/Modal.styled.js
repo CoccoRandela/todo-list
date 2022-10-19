@@ -7,6 +7,8 @@ export const ModalStyles = styled.div`
     border: 1px solid ${({theme}) => theme.colors.dark};
     border-radius: 1em;
     color: ${({theme}) => theme.colors.light};
+    width: minmax(100ch, 50%);
+    margin: 0 auto;
 
     h3, p {
         margin: 0;

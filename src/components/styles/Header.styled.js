@@ -6,7 +6,7 @@ export const HeaderStyles = styled.header`
     max-width: 90%;
     padding: 2em 0;
     margin: 0 auto;
-    background-color: transparent;
+    background-color: ${({bg}) => bg? bg : 'transparent'};
     color: ${({theme}) => theme.colors.light};
     h2 {
         margin: 0;
