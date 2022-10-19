@@ -7,12 +7,12 @@ export const CardStyles = styled.div`
     grid-template-rows: repeat(${({r}) => r}, minmax(min-content, 1em));
     grid-template-columns: 5fr 1fr;
     row-gap: .5em;
+    column-gap: .5em;
     background-color: ${({c, theme}) => c ? c : theme.colors.dark};
     padding: 1em;
     border-radius: 1em;
 
     input {
-        max-width: fit-content;
         background-color: transparent;
         color: ${({theme}) => theme.colors.light};
         border: none;
